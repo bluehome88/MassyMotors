@@ -1,0 +1,41 @@
+<div>
+<h2><?= $this->module; ?><i class="icon-cube"></i></h2>
+<div class="arn-col-sec">
+<h5>Module Name</h5>
+<p><?= $this->module; ?></p>
+<h5>Description</h5>
+
+<div id="arn-mod-desc" class="input-control textarea">
+<?php
+	if(!(boolean)$this->info['description']){
+		print "<small>Add a description.</small>";
+	} else {
+		print $this->info['description'];
+	}
+?>
+</div>
+
+<h5>Parent Module</h5>
+ <div class="input-control select">
+<select id="arn-mod-parent">
+	<option></option>
+	<?php 
+		foreach($this->modules as $g){
+			$g = trim($g);
+			if(($g != $this->module) && !Jax_Acl::getInstance()->acl()->inherits($g, $this->module)){
+				$sel = "";
+				if($this->info['parent'] == $g) $sel = " selected=\"selected\"";
+				print "<option$sel>$g</option>";
+			}
+		}
+	?>
+</select>
+</div>
+
+<button class="btnDelete">Delete</button>
+<ul class="listview fluid sublistview">
+	<li data-role-item="modperms"><i class="icon-key"></i>Module Permissions</li>
+	<li data-role-item="submods"><i class="icon-list"></i>Sub Modules</li>
+</ul>
+</div>
+</div>

@@ -1,0 +1,33 @@
+<div class="grid" id="arn-group-admin">
+<div class="row">
+	<div class="span4">
+		<h2>Menu<i class="icon-chrome"></i></h2>
+		<div class="arn-col-sec">
+			<form id="arn-frm-addGrp" method="post" action="<?= BASEURL."Jax/resources/Groupadmin/access/Write/get/one"; ?>">
+			<h3><i class="icon-plus"></i><span class="btnfiltertoggles">Add Group</span></h3>
+			<div class="divfiltertoggles">
+			<div class="input-control text">
+				<input type="text" name="group" />
+			</div>
+			<input type="submit" value="Add" />
+			</div>
+			</form>
+		</div>
+		
+		<h2>ACL Groups<i class="icon-user-3"></i></h2>
+		<ul class="listview fluid sublistview" id="arn-ugroups-mgt">
+		<?php 
+		foreach ($this->ACLGroups as $group){
+			print "<li>$group</li>";
+		}
+		?>
+		</ul>
+	</div>
+	
+	<div class="span4" id="arn-groupadmin-details">
+	</div>
+	
+	<div class="span4" id="arn-groupadmin-access">
+	</div>
+</div>
+</div>

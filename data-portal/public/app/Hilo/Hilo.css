@@ -1,0 +1,179 @@
+html { 
+  background: url(images/bg.jpg) no-repeat center bottom fixed;
+}
+body {
+	background-color: transparent;
+	min-width:320px !important;
+}
+.Hilo-error-bar {
+	padding:5px;
+}
+h2 {
+	background-color:rgba(0,0,0,.9);
+	padding:5px !important;
+	color:#FFF !important;
+}
+h2 > i {
+	float:right;
+}
+h1.Hilo-app-name {
+	font-size:2em;
+	position:absolute;
+	top:-20px;
+	left:10px;
+}
+#Hilo-view-content {
+	position:relative;
+	top:100px;
+}
+.pointer {
+	cursor:pointer;
+}
+.arn-header-bar {
+	min-width:320px !important;
+	width:100%;
+	height:95px;
+	background-color:rgba(255,255,255,0.9);
+	z-index:10000;
+	position:fixed;
+	border-bottom:3px solid #000;
+}
+#arn-auth-menu {
+	float:right;
+	position:relative;
+	height:50px;
+}
+#arn-auth-menu > ul.dropdown-menu {
+	position:absolute;
+	right:10px;
+}
+.arn-auth-user {
+	float:right;
+	position:relative;
+	top:10px;
+}
+.arn-auth-user > .arn-auth-username {
+	float:right;
+	position:relative;
+	margin-right:10px;
+	font-size:2em;
+	text-shadow:none !important;
+}
+.arn-auth-username > span {
+	font-size:0.55em;
+	display:block;
+	text-align:right;
+	line-height:2em;
+}
+.arn-auth-user .tile {
+	width:50px;
+	height:50px;
+	text-align:center;
+	background-color:#000;
+	float:right;
+}
+.arn-auth-user .tile span {
+	font-size:40px;
+	position:absolute;
+	bottom:10px;
+}
+.arn-header-bar > .bc {
+	color:#000 !important;
+	text-shadow:none !important;
+}
+.rnav-buttons {
+	color:#000 !important;
+}
+.arn-resources-main .tile {
+	background-color:rgba(0,0,0,.7);
+}
+.listview > li:nth-child(odd) {
+	color:#FFF;
+	background-color:rgba(50,50,50,.8);
+}
+.listview > li:nth-child(even) {
+	color:#000;
+	background-color:rgba(255,255,255,.8);
+}
+.arn-col-sec {
+	padding:5px;
+	margin-bottom:10px;
+	background-color:rgba(255,255,255,0.9);
+	color:#000;
+	border-bottom:2px solid #000;
+}
+#arn-acl-all-mods > li:nth-child(odd) > div,#arn-acl-all-groups > li:nth-child(odd) > div {
+	float:right;
+}
+#arn-acl-all-mods > li:nth-child(odd) > div i:hover,#arn-acl-all-groups > li:nth-child(odd) > div i:hover {
+	outline:2px solid #FFF;
+}
+.arn-mod-perms {
+	position:relative;
+	left:-25px;
+}
+.arn-mod-perms,.arn-mod-perms li {
+	padding:0px;
+	margin:0px;
+	width:100%;
+}
+.arn-mod-perms > li > i {
+	float:right;
+}
+.arn-h2-smnfo > small {
+	display:block;
+	font-size:.5em;
+	margin:0px;
+	padding:0px;
+	line-height:1.3em;
+}
+.listview li > i {
+	float:right;
+}
+
+@media screen and (max-width:800px){
+	body {
+		padding-left:0px !important;
+	}
+	.arn-header-bar {
+		margin:0px !important;
+	}
+	.arn-auth-user {
+		float:none;
+	}
+	.arn-header-bar > .bc > span {
+		display:none;
+	}
+	.arn-header-bar > .bc {
+		bottom:0px !important;
+		left:0px !important;
+	}
+	.arn-auth-user > .arn-auth-username {
+		position:absolute;
+		float:none;
+		font-size:1.5em;
+		right:0px;
+		top:55px;
+	}
+	.arn-auth-username > span {
+		display:none;
+	}
+	#arn-auth-menu {
+		float:none;
+		position:absolute;
+		top:0px;
+		right:0px;
+		z-index:10000;
+	}
+	h2 {
+		padding:5px !important;
+	}
+	h1.Hilo-app-name {
+		line-height:0.8em;
+		top:-5px;
+		left:5px;
+	}
+}
+.arn-auth-bar {
+	background-color:rgba(26,128,28,0.8) !important;
+}

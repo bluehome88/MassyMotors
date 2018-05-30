@@ -1,0 +1,47 @@
+<?php 
+/**
+ * Default layout file.
+ * 
+ * @author Ricardo Assing
+ * @copyright (c) Nerds Consulting Limited.
+ * @link http://www.nerdsconsulting.com/MetroJ
+ * @package MetroJ
+ */
+echo $this->doctype();
+?>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<link rel="icon" href="<?= BASEURL; ?>icon.png" type="image/x-icon" />
+<link rel="shortcut icon" href="<?= BASEURL; ?>icon.png" type="image/x-icon" />
+<!--[if lt IE 9]>
+	<link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>css/ie-legacy.css" />
+<![endif]-->
+<!--[if lt IE 8]>
+	<link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>css/ie8-legacy.css" />
+<![endif]-->
+<!--[if IE 9]>
+	<link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>css/ie9.css" />
+<![endif]-->
+<!--[if IE 8]>
+	<link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>css/ie8.css" />
+<![endif]-->
+<!--[if IE 7]>
+	<link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>css/ie7.css" />
+<![endif]-->
+<!--[if IE 6]>
+	<link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>css/ie6.css" />
+<![endif]-->
+	<?= $this->headMeta() ?>
+    <?= $this->headTitle() ?>
+    <?= $this->headLink() ?>
+    <?= $this->headStyle() ?>
+    <?= $this->headScript() ?>
+  
+</head>
+
+<body>
+    <?= $this->layout()->content; ?>
+</body>
+</html>

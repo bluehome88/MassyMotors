@@ -1,0 +1,1 @@
+Schemas provided here can be used as a starting point for application development.

@@ -1,0 +1,99 @@
+<?php 
+if(!isset($this->error)) {
+foreach($this->cust as $h=>&$v){
+	if(empty($v)) $v="<em>Not Defined</em>";
+}
+@extract($this->cust);
+	?>	
+	<h2>Customer Details<i class="icon-user"></i></h2>
+	
+	
+	<div class="arn-col-sec">
+		<h3>Options</h3>
+		<button class="fg-color-white bg-color-red" title="Reset Password" data-id="pwdreset">Reset Password</button>
+		<p>
+		<small>Last Hilo Data Sync Update: <?= @$sys_posupdated; ?></small><br/>
+		<small>Last Customer Online Update: <?= @$sys_webupdated; ?></small>
+		</p>
+	</div>
+	
+	
+	<div class="arn-col-sec">
+		<dl id="hilo-customer-view">
+			<dt>AcctNo</dt>
+			<dd><?= $AcctNo; ?></dd>
+			
+			<dt data-role-id="Gender">Gender</dt>
+			<dd>
+				<div class="input-control select">
+				<select name="frm_Gender" id="frm_Gender">
+					<option></option>
+					<option data-opt="MALE"<?php if(strtolower($Gender)=="male") echo " selected=\"selected\"";?>>MALE</option>
+					<option data-opt="FEMALE"<?php if(strtolower($Gender)=="female") echo " selected=\"selected\"";?>>FEMALE</option>
+				</select>
+				</div>
+			</dd>
+						
+			<dt data-role-id="FirstName">First Name</dt>
+			<dd data-role-iedit="text"><?= @$FirstName; ?></dd>
+			
+			<dt data-role-id="MiddleName">Middle Name</dt>
+			<dd data-role-iedit="text"><?= @$MiddleName; ?></dd>
+			
+			<dt data-role-id="LastName">Last Name</dt>
+			<dd data-role-iedit="text"><?= @$LastName; ?></dd>
+			
+			<dt data-role-id="BirthDate">Date of Birth</dt>
+			<dd data-role-iedit="date"><?= @$BirthDate; ?></dd>
+			
+			<dt data-role-id="Email">Email Address</dt>
+			<dd data-role-iedit="text"><?= @$Email; ?></dd>
+			
+			<dt data-role-id="Phone">Phone</dt>
+			<dd data-role-iedit="text"><?= @$Phone; ?></dd>
+						
+			<dt data-role-id="Address1">Address1</dt>
+			<dd data-role-iedit="text"><?= @$Address1; ?></dd>
+			
+			<dt data-role-id="Address2">Address2</dt>
+			<dd data-role-iedit="text"><?= @$Address2; ?></dd>
+			
+			<dt data-role-id="Address3">Address3</dt>
+			<dd data-role-iedit="text"><?= @$Address3; ?></dd>
+			
+			<dt data-role-id="City">City</dt>
+			<dd data-role-iedit="text"><?= @$City; ?></dd>
+			
+			<dt data-role-id="Country">Country</dt>
+			<dd>
+				<div class="input-control select">
+				<select name="frm_Country">
+				<option></option>
+					<option data-opt="TRINIDAD"<?php if(strtolower($Country)=="trinidad") echo " selected=\"selected\"";?>>TRINIDAD</option>
+					<option data-opt="TOBAGO"<?php if(strtolower($Country)=="tobago") echo " selected=\"selected\"";?>>TOBAGO</option>
+				
+				</select>
+				</div>
+			</dd>
+			
+			<dt data-role-id="Identification">Identification</dt>
+			<dd>
+				<div class="input-control select">
+					<select id="frm_Identification" name="frm_Identification">
+						<option<?php if($Identification=="ID") echo " selected=\"selected\"";?> value="ID">National ID</option>
+						<option<?php if($Identification=="DP") echo " selected=\"selected\"";?> value="DP">Driver's Permit</option>
+						<option<?php if($Identification=="PP") echo " selected=\"selected\"";?> value="PP">Passport</option>
+					</select>
+				</div>
+			</dd>
+			
+			<dt data-role-id="IdentificationNo">Identification No</dt>
+			<dd data-role-iedit="text"><?= @$IdentificationNo; ?></dd>
+		</dl>
+		
+	</div>
+<?php
+} else {
+	echo '<div class="error-bar">'.$this->error.'</div>';
+}
+?>

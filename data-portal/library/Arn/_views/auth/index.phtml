@@ -1,0 +1,16 @@
+<div id="Auth">
+	<div class="message-dialog arn-auth-bar">
+		<form action="<?= BASEURL."Jax/Auth/login-process"?>" method="post">
+			<h1>Login</h1>
+			<div class="input-control text">
+				<input type="text" name="<?= Jax_Auth_Constants::FIELD_USERNAME; ?>" class="with-helper" />   
+			</div>
+			<div class="input-control password">
+				<input type="password" name="<?= Jax_Auth_Constants::FIELD_PASSWORD; ?>" class="with-helper" /> 
+			</div>
+			
+			<input type="hidden" value="ARN_AUTH" name="<?= Jax_Auth_Constants::FIELD_COOKIE; ?>" />
+			<input type="submit" value="Submit"/>
+		</form>
+	</div>
+</div>

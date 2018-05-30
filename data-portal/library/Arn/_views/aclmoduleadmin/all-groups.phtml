@@ -1,0 +1,15 @@
+<?php 
+if(!isset($this->error)) { ?>
+	<ul class="listview fluid sublistview" id="arn-acl-all-groups">
+		<?php 
+			foreach ($this->groups as $group){
+				echo "<li data-role-id=\"$group\">$group</li>";
+				echo "<li style=\"display:none;\"></li>";
+			}
+		?>
+	</ul>
+<?php
+} else {
+	echo '<div class="error-bar">'.$this->error.'</div>';
+}
+?>

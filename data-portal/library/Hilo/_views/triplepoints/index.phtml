@@ -1,0 +1,39 @@
+<div id="hilo-triplepoints-main">
+
+	<div class="grid">
+	
+		<div class="row">
+		
+			<div class="span4">
+				<h2><i class="icon-cart-2"></i>Triple Points Promos</h2>
+				<?php 
+					if(count($this->promos) > 0){ ?>
+					
+					<ul class="listview sublistview" id="tcplist">
+						<?php 
+							foreach($this->promos as $ptbl){
+								$yr = substr($ptbl, 3,4);
+								$mnth = substr($ptbl,8,2);
+								
+								print "<li data-id=\"$ptbl\">TCP $yr $mnth</li>";
+							}
+						?>
+					</ul>					
+					
+					<?php 
+						
+					} else {
+						print "<div class=\"arn-col-sec\"><h4>No TP promos are setup!</h4></div>";
+					}
+				?>
+			</div>
+			
+			<div class="span4" id="poptsdiv"></div>
+			
+			<div class="span4" id="pstatdiv"></div>
+		
+		</div>
+	
+	</div>
+
+</div>

@@ -1,0 +1,41 @@
+<div>
+<h2><?= $this->group; ?><i class="icon-user-3"></i></h2>
+<div class="arn-col-sec">
+<h5>Group Name</h5>
+<p><?= $this->group; ?></p>
+<h5>Description</h5>
+
+<div id="arn-grp-desc" class="input-control textarea">
+<?php
+	if(!(boolean)$this->info['description']){
+		print "<small>Add a description.</small>";
+	} else {
+		print $this->info['description'];
+	}
+?>
+</div>
+
+<h5>Parent Group</h5>
+ <div class="input-control select">
+<select id="arn-grp-parent">
+	<option></option>
+	<?php 
+		foreach($this->groups as $g){
+			$g = trim($g);
+			if(($g != $this->group) && !Jax_Acl::getInstance()->acl()->inheritsRole($g, $this->group)){
+				$sel = "";
+				if($this->info['parent'] == $g) $sel = " selected=\"selected\"";
+				print "<option$sel>$g</option>";
+			}
+		}
+	?>
+</select>
+</div>
+
+<button class="btnDelete">Delete</button>
+<ul class="listview fluid sublistview">
+	<li data-role-item="gperms"><i class="icon-key"></i>Group Permissions</li>
+	<li data-role-item="gmembers"><i class="icon-user-2"></i>Group Members</li>
+</ul>
+</div>
+</div>

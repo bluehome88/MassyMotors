@@ -1,0 +1,8 @@
+<?php
+$this->headTitle(' | '.$this->{JAX_OPTIONS_APP_FULLNAME}); 
+$this->headScript()->captureStart();
+?>
+function baseUrl(){
+	return '<?= BASEURL; ?>';
+}
+<?php $this->headScript()->captureEnd();?>

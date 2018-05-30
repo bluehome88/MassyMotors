@@ -1,0 +1,66 @@
+<div class="grid" id="arn-role-admin">
+<div class="row">
+	<div class="span4">
+	<?php 
+	if(!Jax_App_Options::getInstance()->active_directory){
+	?>
+	<h2>Menu<i class="icon-chrome"></i></h2>
+	<div class="arn-col-sec">
+			<form id="arn-frm-addRole" method="post" action="<?= BASEURL."Jax/resources/Roleadmin/access/Write/get/new"; ?>">
+			
+			<h3><i class="icon-plus"></i><span class="btnfiltertoggles">Add Account</span></h3>
+			<div class="divfiltertoggles">
+				<div class="input-control text">
+					Username:
+					<input type="text" name="frm_username" />
+				</div>
+				<div class="input-control text">
+					Email:
+					<input type="text" name="frm_Email" />
+				</div>
+				<div class="input-control text">
+					Firstname:
+					<input type="text" name="frm_Firstname" />
+				</div>
+				<div class="input-control text">
+					Lastname:
+					<input type="text" name="frm_Lastname" />
+				</div>
+				<div class="input-control select">
+					Sex:
+					<select name="frm_Sex">
+						<option value="--">--</option>
+						<option value="M">Male</option>
+						<option value="F">Female</option>
+					</select>
+				</div>
+				<div class="input-control text">
+					Phone:
+					<input type="text" name="frm_Phone" />
+				</div>
+				<div class="input-control select">
+					Role:
+					<select name="Role">
+						<?php 
+						foreach($this->ACLGroups as $grp){
+							echo "<option>".$grp."</option>";
+						}
+						?>
+					</select>
+				</div>
+				<input type="submit" value="Add" />
+			</div>
+			
+			</form>
+		</div>
+	<?php } ?>
+		<?php echo $this->partial('UI/search-user.phtml'); ?>
+	</div>
+	<div class="span4" id="arn-role-admin-view">
+		
+	</div>
+	<div class="span4" id="arn-role-admin-access">
+		
+	</div>
+</div>
+</div>

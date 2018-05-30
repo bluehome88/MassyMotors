@@ -1,0 +1,35 @@
+<?php
+if(isset($this->error)){
+	print "<div class=\"Hilo-error-bar\">".$this->error."</div>";
+} else { ?>
+
+	<h2>Details<i class="icon-clipboard-2"></i></h2>
+	<div class="arn-col-sec">
+		<dl>
+			<?php 
+			$exc = array('id','cv');
+			
+			foreach($this->data as $h=>$v){
+				if(in_array($h, $exc)) continue;
+				if($h == "sys_added") $h = "application received";
+				if($h == "job_alerts"){
+					if($v == 1){
+						$v = "Yes";
+					} else {
+						$v = "No";
+					}
+				}
+				
+				if(empty($v)) continue;
+
+				$h = ucwords(str_replace("_", " ", $h));
+				
+				print "<dt>$h</dt>";
+				print "<dd>$v</dd>";
+			}
+			?>
+		</dl>
+	</div>
+	
+<?php
+}

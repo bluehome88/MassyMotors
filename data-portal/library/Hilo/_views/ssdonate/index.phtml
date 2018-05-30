@@ -1,0 +1,43 @@
+<div id="hilo-ssdonate-main">
+
+<div class="row">
+
+	<div class="span8">
+		<h2>SS Donations<i class="icon-heart"></i></h2>
+		<div class="arn-col-sec">
+			<h3><i class="icon-tab-2"></i> Pending Transfers</h3>
+		</div>
+		<table id="listPending" class="bg-color-white bordered striped hovered">
+		<thead><tr>
+			<th>From</th>
+			<th>To</th>
+			<!-- <th>Amount</th> -->
+			<th>Submitted</th>
+		</tr></thead>
+		<tbody>
+			<?php 
+			if(is_array($this->pending) && count($this->pending) > 0){
+				foreach($this->pending as $row){
+					print "<tr data-id=\"".$row['id']."\">";
+					
+						print "<td>".$row['firstname']." ".$row['lastname']." (".$row['from'].")</td>";
+						print "<td>".$row['charity']."</td>";
+						//print "<td>".$row['amount']."</td>";
+						print "<td>".$row['requested']."</td>";
+					print "</tr>";
+				}
+			} else {
+				print "<tr><td colspan=\"3\">No pending transfers.</td></tr>";
+			}
+			?>
+			</tbody>
+		</table>
+	</div>
+	
+	<div class="span4" id="donateDetails">
+		
+	</div>
+
+</div>
+
+</div>

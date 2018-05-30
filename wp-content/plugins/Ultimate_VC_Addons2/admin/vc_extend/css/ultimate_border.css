@@ -1,0 +1,137 @@
+.ultimate-border .ultimate-border-input-block,
+.ultimate-border .ultimate-border-radius,
+.ultimate-border .ultimate-border-all-input-block {
+  margin-right: 10px;
+  margin-bottom: 7px;
+  /* font-size: 0; */
+  white-space: nowrap;
+  float: left;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+.ultimate-border .ultimate-border-input-block span.ultimate-border-icon,
+.ultimate-border .ultimate-border-radius span.ultimate-border-icon,
+.ultimate-border .ultimate-border-all-input-block span.ultimate-border-icon {
+  width: auto;
+  display: inline-block;
+  min-width: 16px;
+  padding: 3px 4px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: center;
+  text-shadow: 0 1px 0 #fff;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.ultimate-border .ultimate-border-input-block input.ultimate-border-input,
+.ultimate-border .ultimate-border-radius input.ultimate-border-input,
+.ultimate-border .ultimate-border-all-input-block input.ultimate-border-input {
+  border-left: 0;
+  margin-bottom: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: -3px;
+  padding-top: 3px;
+  padding-bottom: 4px;
+  line-height: 19px;
+  display: inline-block;
+  /* border: 1px solid #ddd; */
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
+  background-color: #fff;
+  color: #333;
+  -webkit-transition: 0.05s border-color ease-in-out;
+  transition: 0.05s border-color ease-in-out;
+  width: 60px;
+  text-align: center;
+}
+.ultimate-border .ultimate-unit-section {
+  display: table-cell;
+  vertical-align: top;
+  float: left;
+  font-weight: bold;
+}
+.ultimate-border .ultimate-unit-section .chosen-container-single .chosen-single {
+  border-radius: 3px;
+  height: 28px;
+  line-height: 25px;
+  text-shadow: 0 1px 0 #fff;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  width: 60px;
+}
+.ultimate-border .ultimate-unit-section .chosen-container-single .chosen-single div b {
+  background-position: 0px 4px;
+}
+.ultimate-border .ultimate-unit-section .chosen-container-single .chosen-single abbr {
+  background-position: -42px 2px;
+}
+.ultimate-border .ultimate-border-radius-block {
+  display: inline-block;
+  float: left;
+  clear: both;
+  margin-top: 10px;
+}
+.ultimate-border .ultimate-border-radius-block .label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.ultimate-border .ultimate-border-style-section {
+  display: inline-block;
+  float: left;
+  width: 100px;
+  margin-top: -20px;
+  margin-left: 20px;
+  /* display: inline-block;
+		float: left;
+		width: 100px;
+		clear: both; */
+}
+.ultimate-border .ultimate-border-style-section .label {
+  display: block;
+  margin-bottom: 3px;
+  font-weight: bold;
+}
+.ultimate-border .ultimate-border-style-section .chosen-single {
+  border-radius: 0px;
+  margin: 0;
+  border: 1px solid #ddd;
+  box-shadow: none;
+  background-color: #fff;
+  color: #333;
+  transition: 0.05s border-color ease-in-out;
+  text-align: center;
+  height: 27px;
+  line-height: 24px;
+  outline: 0;
+  /* border-radius: 3px;
+		    			height: 24px;
+		    			line-height: 22px;
+		    			text-shadow: 0 1px 0 #fff;
+		    			background-color: #eee;
+		    			border: 1px solid #ccc;
+		    			font-size: 11px; */
+}
+.ultimate-border .ultimate-border-style-section .chosen-single:focus,
+.ultimate-border .ultimate-border-style-section .chosen-single:hover {
+  outline: 0;
+  box-shadow: none;
+}
+.ultimate-border .ultimate-colorpicker-section {
+  display: table;
+  float: left;
+  clear: both;
+  margin-top: 10px;
+}
+.ultimate-border .ultimate-colorpicker-section .label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.ultimate-border .ultimate-simplify-section {
+  /* display: table-cell;
+		padding: 2px; */
+}

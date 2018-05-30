@@ -1,0 +1,44 @@
+<div class="grid" id="arn-module-admin">
+<div class="row">
+	<div class="span4">
+		<h2>Menu<i class="icon-chrome"></i></h2>
+		<div class="arn-col-sec">
+			<form id="arn-frm-addModule" method="post" action="<?= BASEURL."Jax/resources/Moduleadmin/access/Write/get/one"; ?>">
+			
+			<h3><i class="icon-plus"></i><span class="btnfiltertoggles">Add Module</span></h3>
+			<div class="divfiltertoggles">
+				<div class="input-control text">
+					<input type="text" name="mod" />
+				</div>
+				<input type="submit" value="Add" />
+			</div>
+			
+			</form>
+			</div>
+			
+			<h2>ACL Modules<i class="icon-cube"></i></h2>
+		<div class="arn-col-sec">
+			<h3><i class="icon-search"></i><span id="btnFilterMod" class="btnfiltertoggles">Filter Module</span></h3>
+			<div id="divFilterMod" class="divfiltertoggles">
+				<div class="input-control text">
+					<input type="text" name="filtermod" id="filtermod" />
+				</div>
+			</div>
+		</div>
+		
+		<ul class="listview fluid sublistview" id="arn-modules-mgt">
+		<?php 
+		foreach ($this->ACLModules as $module){
+			print "<li>$module</li>";
+		}
+		?>
+		</ul>
+	</div>
+	
+	<div class="span4" id="arn-moduleadmin-details">
+	</div>
+	
+	<div class="span4" id="arn-moduleadmin-access">
+	</div>
+</div>
+</div>

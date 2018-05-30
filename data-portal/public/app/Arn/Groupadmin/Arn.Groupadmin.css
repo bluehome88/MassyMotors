@@ -1,0 +1,10 @@
+#arn-group-admin {
+	padding:10px;
+}
+#arn-grp-desc {
+	font-style:italic;
+	color:#666;
+}
+#arn-groupadmin-details .sublistview > li > i {
+	float:right;
+}

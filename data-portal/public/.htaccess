@@ -1,0 +1,22 @@
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ /data-portal/public/index.php [NC,L]
+
+Header unset ETag
+FileETag None
+<FilesMatch "(?i)^.*\.(ico|flv|jpg|jpeg|png|gif|js|css)$">
+Header unset Last-Modified
+Header set Expires "Fri, 21 Dec 2099 00:00:00 GMT"
+Header set Cache-Control "public, no-transform"
+</FilesMatch>
+
+<Files *.css>
+SetOutputFilter DEFLATE
+</Files>
+<Files *.js>
+SetOutputFilter DEFLATE
+</Files>

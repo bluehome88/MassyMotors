@@ -1,0 +1,56 @@
+
+<div id="hilo-valentinesi-main">
+
+	<div class="row">
+	
+		<div class="span6">
+			<h2>Entries<i class="icon-heart"></i></h2>
+
+				<div class="arn-col-sec">
+					<h3><i class="icon-search"></i><span class="btnfiltertoggles">Filter Entries</span></h3>
+					<div class="divfiltertoggles">
+						<div class="input-control text">
+							<input type="text" class="moj-filter-value" data-name="entry-filter" />
+						</div>
+					</div>
+				</div>
+				
+				<div class="arn-col-sec">
+					<table class="striped bordered hovered tblEntries" data-name="entry-filter">
+						<thead>
+						<tr>
+							<th>Name</th>
+							<!-- <th>Email</th> -->
+							<th>Verified</th>
+							<th>Votes</th>
+						</tr>
+						</thead>
+						
+						<tbody>
+							<?php 
+							foreach ($this->entries as $entry){
+								print "<tr data-id=\"".$entry['entry_id']."\">";
+									print "<td>".$entry['firstname']." ".$entry['lastname']."</td>";
+									//print "<td>".$entry['email']."</td>";
+									
+									if(is_null($entry['verified'])){
+										print "<td>Not verified</td>";
+									} else {
+										print "<td>".$entry['verified']." by ".$entry['verified_by']."</td>";
+									}
+									
+									print "<td>".$entry['votes']."</td>";
+								print "</tr>";
+							}
+							?>
+						</tbody>
+					</table>
+				</div>
+				
+		</div>
+		
+		<div class="span6" id="valEntry"></div>
+	
+	</div>
+
+</div>

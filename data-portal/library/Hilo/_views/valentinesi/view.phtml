@@ -1,0 +1,19 @@
+<h2>Entry Details</h2>
+		<?php
+if(isset($this->entry)){
+	extract($this->entry);
+}
+?>
+
+<div class="arn-col-sec">
+<button id="entryApprove" data-entry="<?= @$id; ?>">Approve Poem</button>
+</div>
+<div class="arn-col-sec">
+	<dl>
+	<dt>Poem</dt>
+	<dd><?= @str_replace("\r\n", "<br/>",@$poem); ?></dd>
+	
+	<dt>Image</dt>
+	<dd><img src="data:image/png;base64,<?= @$styled; ?>" width="400" /></dd>
+	</dl>
+</div>

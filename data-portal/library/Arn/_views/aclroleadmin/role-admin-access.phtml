@@ -1,0 +1,28 @@
+<div>
+<?php 
+if(!isset($this->error)) { ?>
+	<h2><i class="icon-locked"></i> User Permissions</h2>
+	
+	<div class="arn-col-sec">
+		<h3><i class="icon-search"></i><span class="btnfiltertoggles">Filter Modules</span></h3>
+		<div class="divfiltertoggles">
+			<div class="input-control text">
+				<input type="text" name="filtermoda" id="filtermoda" />
+			</div>
+		</div>
+	</div>
+	
+	<ul class="listview fluid modfilterlist sublistview" id="arn-acl-user-mods" data-role-flist="alt">
+		<?php 
+			foreach ($this->modules as $mod){
+				echo "<li data-role-id=\"$mod\">$mod</li>";
+				echo "<li style=\"display:none;\"></li>";
+			}
+		?>
+	</ul>
+<?php
+} else {
+	echo '<div class="error-bar">'.$this->error.'</div>';
+}
+?>
+</div>

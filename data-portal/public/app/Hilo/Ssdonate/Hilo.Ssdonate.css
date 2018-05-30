@@ -1,0 +1,9 @@
+#hilo-ssdonate-main {
+	padding:10px;
+}
+#listPending td {
+	cursor:pointer;
+}
+#listPending th {
+	font-weight:bold;
+}

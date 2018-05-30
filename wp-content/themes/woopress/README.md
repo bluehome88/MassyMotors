@@ -1,0 +1,1 @@
+Theme Name: ROYAL - 8theme WordPress theme

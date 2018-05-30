@@ -1,0 +1,29 @@
+<div class="tiles arn-resources-main">
+<?php
+if(isset($this->resources) && is_array($this->resources)){
+	foreach($this->resources as $n=>$r){
+?>
+	<div class="tile icon outline-color-blue" id="<?= $n; ?>"<?php if(array_key_exists("children",$r)) echo ' data-resource-children="true"';?>>
+		<div class="tile-content">
+			<?php 
+			if(is_array($r['config'])) $r['config'] = (object) $r['config'];
+			if(@$r['config']->icon) echo '<i class="'.$r['config']->icon.'"></i>';
+			?>
+		</div>
+		
+		<div class="brand">
+			<span class="name"><?php 
+			if(@$r['config']->display_name){ 
+				echo $r['config']->display_name;
+			} else { 
+				echo $n;
+			}; ?>
+			</span>
+	    </div>
+	    
+	</div>
+<?php
+	}
+} 
+?>
+</div>

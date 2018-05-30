@@ -1,0 +1,31 @@
+<?php 
+if(!isset($this->error)){ 
+extract($this->data);
+	?>
+	
+	<h2>Details<i class="icon-list"></i></h2>
+	<div class="arn-col-sec">
+		<dl>
+		
+			<dt>From:</dt>
+			<dd><?= $firstname." ".$lastname." (".$from.")"; ?></dd>
+			
+			<dt>To:</dt>
+			<dd><?= $charity; ?></dd>
+			
+			<dt>Amount:</dt>
+			<dd><?= $amount; ?> points</dd>
+			
+			<dt>Requested on:</dt>
+			<dd><?= $requested; ?></dd>
+		
+		</dl>
+		<hr size="1" />
+		<button id="btnProcess" class="bg-color-blue fg-color-white">Mark as processed</button>
+	</div>
+
+<?php
+} else {
+	echo '<div class="error-bar">'.$this->error.'</div>';
+}
+?>

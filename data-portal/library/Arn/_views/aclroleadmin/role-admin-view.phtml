@@ -1,0 +1,91 @@
+<div>
+<?php 
+if(!isset($this->error)) {
+	$u = (Object) $this->roleObject;
+	echo '<h2 class="arn-h2-smnfo"><i class="icon-user"></i> '.@$u->Fullname.
+	'<small><strong>Role(s):</strong> ';
+	
+	$roles = "";
+	
+	foreach ($u->Role as $role) $roles .= $role.", ";
+	echo substr($roles, 0,strlen($roles)-2);
+
+	
+	echo '</small>'.
+	'<small><strong>Email:</strong> '.@$u->Email.'</small>'.
+	'<small><strong>Phone:</strong> '.@$u->Phone.'</small>'.
+	'</h2>';
+?>
+<?php 
+if(!Jax_App_Options::getInstance()->active_directory){ ?>
+	
+	<div class="arn-col-sec">
+	<h3>Account Details</h3>
+	<ul class="listview sublistview accountDetails">
+		<li>
+			<dl>
+				<dt>Username</dt>
+				<dd><?= $u->username; ?></dd>
+			
+				<dt data-role-id="Firstname">Firstname</dt>
+				<dd data-role-iedit="text"><?= $u->Firstname; ?></dd>
+			
+				<dt data-role-id="Lastname">Lastname</dt>
+				<dd data-role-iedit="text"><?= $u->Lastname; ?></dd>
+			
+				<dt data-role-id="Email">Email</dt>
+				<dd data-role-iedit="text"><?= $u->Email; ?></dd>
+			
+				<dt data-role-id="Sex">Sex</dt>
+				<dd>
+					<div class="input-control select">
+					<select>
+					<option>--</option>
+					<?
+					foreach(array("Male"=>"M","Female"=>"F") as $sn=>$s){
+						$sel = "";
+						if($u->Sex == $s) $sel = ' selected="selected"';
+						echo "<option value=\"".$s."\"$sel>".$sn."</option>";
+					}
+					?>
+					</select>
+					</div>
+				</dd>
+			</dl>
+			<dl>
+				<dt data-role-id="Phone">Phone</dt>
+				<dd data-role-iedit="text"><?= $u->Phone; ?></dd>
+			</dl>
+		</li>
+	</ul>
+	<?php 
+	if($u->sys_disabled == 1){
+		echo '<button class="btnValidate">Enable</button>';
+	} else {
+		echo '<button class="btnDelete">Disable</button>';
+	}
+	?>
+	<button class="btnWarn">Reset Password</button>
+	</div>
+<?php	
+}
+?>
+<h2>Group Membership<i class="icon-user-3"></i></h2>
+	<ul class="listview fluid sublistview" id="arn-acl-ugroups">
+		<?php 
+		
+		foreach ($this->ACLGroups as $group){
+			$sel = "";
+			
+			if(in_array($group, $u->Role)) $sel = ' class="selected"';
+			print "<li".$sel.">$group</li>";
+		}
+		?>
+	</ul>
+
+<?php
+} else {
+	echo '<div class="error-bar">'.$this->error.'</div>';
+}
+?>
+</div>

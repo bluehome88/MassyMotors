@@ -1,0 +1,19 @@
+<div class="arn-auth-user">
+	<div data-role="dropdown" id="arn-auth-menu">
+              
+    	<div class="tile icon outline-color-blue">
+			<div class="tile-content">
+				<span class="icon-user"></span>
+			</div>
+		</div>
+		<ul class="dropdown-menu">
+			<li><a href="#" data-role-id="arn-lnk-cpwd">Change Password</a></li>
+        	<li><a href="Jax/Auth/logout" target="_json" data-role-id="arn-lnk-logout">Logout</a></li>
+        </ul>
+                    
+    </div>
+    
+    <div class="arn-auth-username">
+		<?= @$this->user; ?><span><?= @$this->role; ?></span>
+	</div>
+</div>

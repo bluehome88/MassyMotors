@@ -1,0 +1,9 @@
+#arn-role-admin {
+	padding:10px;
+}
+#arn-acl-user-mods > li:nth-child(odd) > div {
+	float:right;
+}
+#arn-acl-user-mods > li:nth-child(odd) > div i:hover {
+	outline:2px solid #FFF;
+}

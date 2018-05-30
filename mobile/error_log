@@ -1,0 +1,1 @@
+[02-Mar-2014 13:47:35 America/Chicago] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'hilofood_hfuser'@'localhost' (using password: YES) in /home/hilofood/public_html/mobile/phpsqlsearch_genxml.php on line 15

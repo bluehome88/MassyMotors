@@ -1,0 +1,11 @@
+#Auth > div > form {
+	width:40%;
+	min-width:300px;
+	margin:auto;
+}
+.arn-auth-bar {
+	background-color:rgba(0,0,0,0.3);
+}
+.arn-auth-bar h3 {
+	margin:0px;
+}

@@ -1,0 +1,27 @@
+@charset "UTF-8";
+/* CSS Document */
+
+#framePopUp {
+    background-color:black;
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+#inPopUp {
+    display: none;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    z-index: 100;
+	background-color:white;
+	overflow-x: hidden;
+	padding:40px;
+	overflow-y: scroll;
+}
+html > body #inPopUp {
+    position: fixed;
+}

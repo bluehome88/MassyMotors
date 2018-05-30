@@ -1,0 +1,48 @@
+@charset "UTF-8";
+/* CSS Document */
+
+#framePopUp {
+    background-color:black;
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+#inPopUp {
+    display: none;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    z-index: 90;
+	background-color:white;
+	/*overflow: hidden;*/
+	padding: 40px;
+	overflow-y: scroll;
+}
+#inPopUp p{
+	color:black;
+}
+#inPopUp>p:first-child{
+	text-align:center;
+}
+html > body #inPopUp {
+    position: fixed;
+}
+
+a#spmCloseButton{
+    display: block;
+    width: 34px;
+    height: 34px;
+    top:10px;
+    right:10px;
+    position: absolute;
+    z-index: 100;
+    background: url(images/spm-close-icon.png) top left no-repeat transparent;
+    outline: none;
+    border: none;
+    text-decoration: none;
+}

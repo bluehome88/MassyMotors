@@ -1,0 +1,271 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+	<meta charset="UTF-8" />
+    <meta author="Interactive Data Labs" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Hi-Lo Food Stores Mobile</title>
+	
+	<!-- Fonts -->
+    <link href="css/metro-bootstrap.css" rel="stylesheet" type="text/css" media="screen" title="stylesheet" />
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css' />
+	
+	<!-- CSS -->
+	<link href="./css/style.css" rel="stylesheet" type="text/css" media="screen" title="stylesheet" />
+	<link href="./css/responsive.css" rel="stylesheet" type="text/css" media="screen" title="stylesheet" />
+	<link href="./css/custom.css" rel="stylesheet" type="text/css" media="screen" title="stylesheet" />
+
+	
+	<!--[if lt IE 9]>
+	<script type="text/javascript" src="./js/modernizr.js"></script>
+	<link href="./css/ie.css" rel="stylesheet" type="text/css" media="screen" title="stylesheet" />
+	<![endif]-->
+
+</head>
+<body class="home metro" onLoad="initialise()">
+	
+	<!-- SITE HEADER -->
+	<header id="site-header">
+		<div class="container">
+			
+			<a href="index.html" class="site-logo">
+				<img src="./images/logo.png" alt="Hi-Lo" />
+				<img src="./images/logo-retina.png" alt="Hi-Lo" class="logo-retina" width="128" height="50" />				
+			</a>
+			
+			<a href="#" class="toggle-site-nav show-on-mobile show-on-tablet"><i class="icon-grid-view"></i></a>
+			
+			<nav id="site-nav">
+				<ul>
+					<li><a href="smart-shopper.html">Smart Shopper</a></li>
+					<li><a href="coupons.html">Coupons</a></li>
+					<li><a href="recipes.html">Recipes</a></li>
+					<li><a href="stores.html">Store Locator</a></li>
+					<li><a href="index.html">Hi-Lo News</a></li>
+					<li><a href="settings.html">Settings</a></li>
+				</ul>
+			</nav><!-- end site nav -->
+			
+		</div>
+	</header>
+	
+<div id="store-locator" class="panel">
+    <div class="container">
+        <p align="right"><a href="stores.html" class="button button-size-medium button-edge-rounded"><i class="icon-undo"></i> Go Back </a></p>
+        <div id="map"></div>
+        <div id="info" class="lightbox">Detecting your location...</div>
+	</div>
+</div>  
+ 
+	<!-- jQuery -->
+	<script type="text/javascript" src="./js/jquery.min.js"></script>
+    
+    <!-- Map api -->
+    <script src='https://maps.googleapis.com/maps/api/js?sensor=false'></script>
+    <script type="text/javascript" src="./js/geometa.js"></script>
+
+<script type="text/javascript">
+    //<![CDATA[
+    var map;
+    var markers = [];
+    var infoWindow;
+    var locationSelect;
+	var myLat;
+	var myLng;
+
+  function initialise() {
+    var latlng = new google.maps.LatLng(10.679320,-61.631100);
+    var myOptions = {
+      zoom: 4,
+      center: latlng,
+      mapTypeId: 'roadmap',
+      disableDefaultUI: true
+    }
+    map = new google.maps.Map(document.getElementById("map"), myOptions);
+    prepareGeolocation();
+    doGeolocation();
+  }
+
+  function doGeolocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
+    } else {
+      positionError(-1);
+    }
+  }
+
+  function positionError(err) {
+    var msg;
+    switch(err.code) {
+      case err.UNKNOWN_ERROR:
+        msg = "Unable to find your location";
+        break;
+      case err.PERMISSION_DENINED:
+        msg = "Permission denied in finding your location";
+        break;
+      case err.POSITION_UNAVAILABLE:
+        msg = "Your location is currently unknown";
+        break;
+      case err.BREAK:
+        msg = "Attempt to find location took too long";
+        break;
+      default:
+        msg = "Location detection not supported in browser";
+    }
+    document.getElementById('info').innerHTML = msg;
+  }
+
+  function positionSuccess(position) {
+    // Centre the map on the new location
+    var coords = position.coords || position.coordinate || position;
+    var latLng = new google.maps.LatLng(coords.latitude, coords.longitude);
+    map.setCenter(latLng);
+    map.setZoom(12);
+    var marker = new google.maps.Marker({
+	    map: map,
+	    position: latLng,
+	    title: 'Why, there you are!'
+    });
+	myLat = coords.latitude;
+	myLng = coords.longitude;
+    document.getElementById('info').innerHTML = 'Looking for <b>' +
+        coords.latitude + ', ' + coords.longitude + '</b>...';
+
+    // And reverse geocode.
+    (new google.maps.Geocoder()).geocode({latLng: latLng}, function(resp) {
+		  var place = "You're around here somewhere!";
+		  if (resp[0]) {
+			  var bits = [];
+			  for (var i = 0, I = resp[0].address_components.length; i < I; ++i) {
+				  var component = resp[0].address_components[i];
+				  if (contains(component.types, 'political')) {
+					  bits.push('<b>' + component.long_name + '</b>');
+					}
+				}
+				if (bits.length) {
+					place = bits.join(' > ');
+				}
+				marker.setTitle(resp[0].formatted_address);
+			}
+			document.getElementById('info').innerHTML = place;
+	  });
+	  searchLocationsNear();
+  }
+
+  function contains(array, item) {
+	  for (var i = 0, I = array.length; i < I; ++i) {
+		  if (array[i] == item) return true;
+		}
+		return false;
+	}
+
+
+
+
+
+
+   function clearLocations() {
+     //infoWindow.close();
+     for (var i = 0; i < markers.length; i++) {
+       markers[i].setMap(null);
+     }
+     markers.length = 0;
+
+     /*locationSelect.innerHTML = "";
+     var option = document.createElement("option");
+     option.value = "none";
+     option.innerHTML = "See all results:";
+     locationSelect.appendChild(option);*/
+   }
+
+   function searchLocationsNear() { 
+     clearLocations();
+     var radius = 5;
+     var searchUrl = 'http://hilofoodstores.com/mobile/phpsqlsearch_genxml.php?lat='+myLat+'&lng='+myLng+'&radius=' + radius;
+     downloadUrl(searchUrl, function(data) {
+       var xml = parseXml(data);
+       var markerNodes = xml.documentElement.getElementsByTagName("marker");
+       var bounds = new google.maps.LatLngBounds();
+       for (var i = 0; i < markerNodes.length; i++) {
+         var name = markerNodes[i].getAttribute("name");
+         var address = markerNodes[i].getAttribute("address");
+         var distance = parseFloat(markerNodes[i].getAttribute("distance"));
+         var latlng = new google.maps.LatLng(
+              parseFloat(markerNodes[i].getAttribute("lat")),
+              parseFloat(markerNodes[i].getAttribute("lng")));
+
+         createOption(name, distance, i);
+         createMarker(latlng, name, address);
+         bounds.extend(latlng);
+       }
+       map.fitBounds(bounds);
+      /* locationSelect.style.visibility = "visible";
+       locationSelect.onchange = function() {
+         var markerNum = locationSelect.options[locationSelect.selectedIndex].value;
+         google.maps.event.trigger(markers[markerNum], 'click');
+       };*/
+      });
+    }
+
+    function createMarker(latlng, name, address) {
+      var html = "<b>" + name + "</b> <br/>" + address;
+      var marker = new google.maps.Marker({
+        map: map,
+        position: latlng
+      });
+      google.maps.event.addListener(marker, 'click', function() {
+        infoWindow.setContent(html);
+        infoWindow.open(map, marker);
+      });
+      markers.push(marker);
+    }
+
+    function createOption(name, distance, num) {
+    /*  var option = document.createElement("option");
+      option.value = num;
+      option.innerHTML = name + "(" + distance.toFixed(1) + ")";
+      locationSelect.appendChild(option);*/
+    }
+
+    function downloadUrl(url, callback) {
+      var request = window.ActiveXObject ?
+          new ActiveXObject('Microsoft.XMLHTTP') :
+          new XMLHttpRequest;
+
+      request.onreadystatechange = function() {
+		  console.log('request');
+        if (request.readyState == 4) {
+          request.onreadystatechange = doNothing;
+          callback(request.responseText, request.status);
+        }
+      };
+
+      request.open('GET', url, true);
+      request.send(null);
+    }
+
+    function parseXml(str) {
+      if (window.ActiveXObject) {
+        var doc = new ActiveXObject('Microsoft.XMLDOM');
+        doc.loadXML(str);
+        return doc;
+      } else if (window.DOMParser) {
+        return (new DOMParser).parseFromString(str, 'text/xml');
+      }
+    }
+
+    function doNothing() {}
+
+//]]>
+</script>
+
+	<!-- Custom JS -->
+	<script type="text/javascript" src="./js/script.js"></script>
+
+</body>
+</html>

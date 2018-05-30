@@ -1,0 +1,113 @@
+<div id="hilo-japprpt" class="row">
+	<div class="span4" id="hilo-japprpt-menu">
+	<form id="frmJappRpt" method="get" action="<?= BASEURL; ?>Jax/resources/Jobapp/access/Read/get/list">
+		<h2>Filters<i class="icon-filter"></i></h2>
+		<div class="arn-col-sec">
+		
+			<div class="input-control text">
+				Application Date:
+				<input type="text" name="frm_sys_added" class="datepicker" />
+			</div>
+			
+			<div class="input-control select">
+				Application Status:
+				<select name="frm_sys_reviewed">
+					<option></option>
+					<option>Reviewed</option>
+					<option>Not Reviewed</option>
+				</select>
+			</div>
+		
+			<div class="input-control select">
+				Gender:
+				<select name="frm_gender">
+					<option></option>
+					<option>Male</option>
+					<option>Female</option>
+				</select>
+			</div>
+			
+			<div class="input-control select">
+				Preferred Branch:
+				<select name="frm_preferred_branch">
+				<option></option>
+				<?php 
+					foreach ($this->locations as $location){
+				  		echo '<option>'.$location['location'].'</option>';
+				  	}
+	      		?>
+				</select>
+			</div>
+			
+			<div class="input-control select">
+				Employment Type:
+				<select name="frm_employment_type">
+				<option></option>
+				<option>Full-Time</option>
+				<option>Part-Time</option>
+				</select>
+			</div>
+			
+			<div class="input-control select">
+				Position:
+				<select name="frm_position">
+					<option></option>
+					<?php 
+					foreach ($this->positions as $pos){
+				  		echo '<option>'.$pos['position'].'</option>';
+				  	}
+	      		?>
+				</select>
+			</div>
+						
+			<input type="submit" value="View" /><input type="reset" value="Reset" />
+			
+			<h3><i class="icon-filter"></i><span class="btnfiltertoggles"> Filter Columns</span></h3>
+			<div class="divfiltertoggles">
+				<ul class="listview sublistview showcols">
+					<?php 
+					$nosel = array("sys_reviewed","sys_reviewed_by","sys_added","gender","job_alerts","dob","city","email","cv");
+					foreach($this->fcols as $col){
+						echo "<li data-name=\"$col\"";
+						
+						if(!in_array($col, $nosel)){
+							 echo " class=\"selected\"";
+						}
+						
+						echo ">$col";
+						
+						if(!in_array($col, $nosel)){
+							echo "<input type=\"hidden\" name=\"col[]\" value=\"$col\" />";
+						}
+						
+						echo "</li>";
+					}
+					?>
+				</ul>
+			</div>
+			
+		</div>
+		
+		
+	</form>
+	</div>
+	
+	<div class="span8" id="hilo-japprpt-main">
+	<h2>Export Options<i class="icon-share"></i></h2>
+	<div>
+		<button data-export='print' class="bg-color-blue fg-color-white">Printable Version <i class="icon-printer"></i></button>
+		<button data-export='csv' class="bg-color-green fg-color-white">Excel CSV <i class="icon-file-excel"></i></button>
+	</div>
+	
+	<h2>Job Applications Listing<i class="icon-list"></i></h2>
+	<div id="rpt-sumtotal" class="arn-col-sec" style="display:none;">
+		
+	</div>
+		 <table class="hovered" id="tblJappList">
+         	<thead>
+            	<tr id="jappTblHdr"></tr>
+            </thead>
+			<tbody id="jappTblBody"></tbody>
+         </table>
+	</div>
+</div>

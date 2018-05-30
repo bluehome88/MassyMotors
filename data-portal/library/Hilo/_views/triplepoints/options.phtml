@@ -1,0 +1,17 @@
+<?php
+if(isset($this->error)){
+	print "<div class=\"Hilo-error-bar\">".$this->error."</div>";
+} else { ?>
+
+	<h2>Options<i class="icon-grid"></i></h2>
+	<ul class="listview sublistview">
+		<li data-option="extract-emails"><i class="icon-file-excel"></i>Extract Unprocessed Emails</li>
+		<li data-option="full-extract"><i class="icon-file-excel"></i>Full Email Extract</li>
+		<li data-option="weekly-email"><i class="icon-share"></i>Send Weekly Emails</li>
+		
+		<li data-option="weekly-email-test"><i class="icon-share"></i>(TEST) Send Weekly Emails</li>
+	</ul>
+	
+<?php
+}
+?>

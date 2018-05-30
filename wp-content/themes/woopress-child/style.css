@@ -1,0 +1,291 @@
+/*
+ Theme Name:   WooPress Child
+ Theme URI:    http://8theme.com/
+ Description:  WooPress Child Theme
+ Author:       8theme
+ Author URI:   http://8theme.com
+ Template:     woopress
+ Version:      0.0.1
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+ Text Domain:  woopress-child
+*/
+
+.adsbygoogle{display: none !important;}
+
+.blog-post .content-article p {
+    font-size: 16px;
+    color:#333;
+}
+
+/* Hide Ecommerce System */
+.shopping-container,
+.top-links .links,
+.header-search,
+#menu-item-16503,
+.add_to_cart_button,
+.single_add_to_cart_button,
+.vc_custom_1448684301071
+{
+	display:none !important;
+}
+/* ----------------------- */
+
+.row_how_to_pack{
+	display:none !important;
+}
+
+/* new & event */
+.home_news_block .vc_grid-item-zone-c-right .vc_gitem-animated-block{
+	width: 30% !important;
+	height: 0;
+    padding-bottom: 30%;
+    overflow: hidden;
+}
+.home_news_block .vc_grid-item-zone-c-right .vc_gitem-zone-c{
+	width: 65% !important;
+	background: none !important;
+}
+.home_news_block a{
+    background:none !important;
+    color: #f4761e !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    padding: 0 !important;
+    text-transform: uppercase;
+}
+.home_news_block .vc_grid-item{
+	margin-top: 20px !important;
+	border-bottom: 1px solid #f4f3f4 !important;
+}
+
+.home_news_block .vc_grid-item:last-child{
+	border-bottom: 0px solid #f4f3f4 !important;
+	padding-bottom: 0 !important;
+	margin-bottom: 0 !important;
+}
+.home_news_block .vc_grid-item:last-child .vc_btn3-container{
+	margin-bottom: 0 !important;
+}
+.home_news_block .vc_grid-item-mini{
+	background: none !important;
+}
+.home_news_block .vc_gitem-post-data-source-post_title{
+	color: #f4761e !important;
+	font-weight: normal !important;
+}
+
+.home_news_block .vc_gitem-post-data-source-post_title h4{
+	font-size: 18px !important;
+	text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;	
+    margin-top: -10px;
+    text-transform: uppercase;
+}
+.home_news_block .vc_gitem-post-data-source-post_date{
+	color: #c9c9c9 !important;
+	font-size: 11px !important;
+}
+.home_news_block .vc_gitem-post-data{
+	margin-bottom: 0px !important;
+}
+.home_news_block .vc_gitem-post-data p{
+	width: 100%;
+    overflow: hidden;
+    margin: 0 0 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; 
+  line-height: 20px;
+}
+.home_news_block .vc_btn3-container.vc_btn3-left{
+	margin-bottom: 0px !important ;
+}
+
+/* news detail page */
+.cat_news .meta-post{
+	font-size: 12px;
+	color: #c9c9c9;
+	margin-bottom: 10px;
+}
+.cat_news .meta-post:after{
+	content: none;
+}
+.cat_news .post_title{
+	color: #f4761e;
+	font-size: 24px;
+	margin-top: 40px;
+	margin-bottom: 15px;
+}
+.cat_news .wp-picture{
+	text-align: left !important;
+}
+
+/*news page grid style*/
+.news_page_grid .vc_grid-item-zone-c-right .vc_gitem-animated-block{
+	width: 30% !important;
+	height: 0;
+    padding-bottom: 22%;
+    overflow: hidden;
+}
+.news_page_grid .vc_grid-item-zone-c-right .vc_gitem-zone-c{
+	width: 65% !important;
+	background: none !important;
+}
+.news_page_grid a{
+    text-transform:uppercase !important;
+}
+.news_page_grid .vc_grid-item{
+	margin-top: 30px !important;
+	border-bottom: 1px solid #f4f3f4 !important;
+}
+
+.news_page_grid .vc_grid-item:last-child{
+	border-bottom: 0px solid #f4f3f4 !important;
+	padding-bottom: 0 !important;
+	margin-bottom: 0 !important;
+}
+.news_page_grid .vc_grid-item:last-child .vc_btn3-container{
+	margin-bottom: 0 !important;
+}
+.news_page_grid .vc_grid-item-mini{
+	background: none !important;
+}
+.news_page_grid .vc_gitem-post-data-source-post_title{
+	color: #f4761e !important;
+	font-size: 16px !important;
+	font-weight: normal !important;
+}
+.news_page_grid .vc_gitem-post-data-source-post_date{
+	color: #c9c9c9 !important;
+	font-size: 11px !important;
+}
+.news_page_grid .vc_gitem-post-data{
+	margin-bottom: 12px !important;
+}
+.news_page_grid .vc_gitem-post-data h4{
+	text-transform: capitalize;
+	font-size: 16px;
+}
+.news_page_grid .vc_btn3.vc_btn3-color-juicy-pink, .news_page_grid  .vc_btn3.vc_btn3-color-juicy-pink.vc_btn3-style-flat {
+	font-size: 12px !important;
+    width: 118px;
+    height: 39px;
+    padding-top: 10px;
+}
+
+.news_page_grid .vc_gitem_row .vc_gitem-col {
+	padding: 0px 14px;
+    overflow: hidden;
+}
+.news_page_grid .vc_gitem_row .vc_gitem-col p{
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical; 
+	width: 100%;
+}
+.news_page_grid .vc_gitem_row .vc_gitem-col p:empty {
+	display: none;
+}
+
+.news_page_grid .vc_grid-pagination {
+	margin: 70px 0px 0 !important;
+}
+
+.news_page_grid .vc_grid-pagination-list .vc_grid-page,
+.news_page_grid .vc_grid-pagination-list .vc_grid-prev,
+.news_page_grid .vc_grid-pagination-list .vc_grid-next{
+	background: none !important;
+	border: none !important;
+}
+
+.news_page_grid .vc_grid-pagination-list .vc_grid-page a,
+.news_page_grid .vc_grid-pagination-list .vc_grid-prev a,
+.news_page_grid .vc_grid-pagination-list .vc_grid-next a{
+	background: none !important;
+	border: none !important;
+	font-size: 14px;
+	border-radius: 4px !important;
+	padding: 3px 10px !important;
+}
+.news_page_grid .vc_grid-pagination-list .vc_grid-prev a,
+.news_page_grid .vc_grid-pagination-list .vc_grid-next a{
+	color: #00497d !important;
+}
+.news_page_grid .vc_grid-pagination-list .vc_grid-page.vc_grid-active a{
+	border: 1px #00497d solid !important;
+}
+
+.content-article p{
+	color: #6b6b6b;
+}
+
+/* phartmacy page */
+.page.page-id-16661 .page-heading.bc-type-5{
+	background-attachment: inherit !important;
+	background-position: center center;
+	min-height: 230px;
+}
+.page.page-id-16661 .page-heading.bc-type-5 .container{
+	display: none;
+}
+.page.page-id-16661 .store_init h3, .page.page-id-16661 .store_init h4{
+	color: #1b4666 !important;
+}
+.page.page-id-16661 .store_init h3{
+	font-size: 30px !important;
+	text-transform: capitalize !important;
+}
+.page.page-id-16661 .store_init h4{
+	font-size: 19.5px !important;
+	text-transform: inherit !important;
+}
+
+.pharmacy_link{ font-weight: bold; font-size: 35px; line-height:38px;color: #1b4666;font-family: Arial;}
+.triangle_mark{
+	background: #009bdb;
+    width: 100px;
+    height:80px;
+	left: -50px;
+	top:-50px;
+	position: absolute;
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+.triangle_mark.yellow{
+	background: #f4d800;
+}
+.col_pharmacy_link_block > .vc_column-inner > .wpb_wrapper{
+	overflow: hidden;
+    position: relative;    
+}
+
+.triangle-bottomright {
+	width: 0;
+	height: 0;
+	border-bottom: 200px solid #009bdb;
+	border-left: 200px solid transparent;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.how_to_image{
+	max-height: 200px;
+	padding-right: 15px !important;
+}
+
+.how_to_image{
+	width:100% !important;
+}
+.vc_custom_1527517397813{
+    margin-top: -60px !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .vc_custom_1527517397813{
+	    margin-top: 0 !important;
+    }
+}
