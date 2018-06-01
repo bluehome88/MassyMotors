@@ -69,7 +69,7 @@
 			$box["content"] = $content;
 			$box["draw_function"] = $customDrawFunction;
 			
-			// self::$arrMetaBoxes[] = $box;			
+			self::$arrMetaBoxes[] = $box;			
 		}
 		
 		

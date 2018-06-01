@@ -256,7 +256,7 @@ function vc_gitem_template_attribute_post_date( $value, $data ) {
 		'post' => null,
 	), $data ) );
 
-	return '<i class="fa fa-clock-o"></i> '.get_the_date( '', $post->ID );
+	return get_the_date( '', $post->ID );
 }
 
 /**

@@ -1,8 +1,4 @@
 <?php add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
-@ini_set( 'upload_max_size' , '64M' );
-@ini_set( 'post_max_size', '64M');
-@ini_set( 'max_execution_time', '300' );
-
 function theme_enqueue_styles() {
     wp_enqueue_style( 'child-style', get_stylesheet_uri(), array( 'bootstrap', 'parent-style' ) );
 }
@@ -214,13 +210,3 @@ function login_with_email_address($username) {
 add_action('wp_authenticate','login_with_email_address');
 
 add_filter('deprecated_constructor_trigger_error', '__return_false');
-
-function woocommerce_disable_shop_page() {
-    global $post;
-    if (is_shop()):
-    global $wp_query;
-    $wp_query->set_404();
-    status_header(404);
-    endif;
-}
-add_action( 'wp', 'woocommerce_disable_shop_page' );
