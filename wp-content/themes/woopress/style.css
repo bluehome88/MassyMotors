@@ -19832,7 +19832,7 @@ footer .widget-title {
   border: 20px solid #f5f5f5;
 }
 .full-width-ie .vc_row-fluid {
-  padding: 30px 30px 55px 30px !important;
+  padding: 0px 30px 25px 30px !important;
 }
 .vc_row-fluid[data-vc-stretch-content="true"] .vc_col-sm-4 .products-grid.row-count-2 .product {
   width: 48%;

@@ -210,3 +210,13 @@ function login_with_email_address($username) {
 add_action('wp_authenticate','login_with_email_address');
 
 add_filter('deprecated_constructor_trigger_error', '__return_false');
+
+function woocommerce_disable_shop_page() {
+    global $post;
+    if (is_shop()):
+    global $wp_query;
+    $wp_query->set_404();
+    status_header(404);
+    endif;
+}
+add_action( 'wp', 'woocommerce_disable_shop_page' );
