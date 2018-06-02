@@ -21,19 +21,26 @@
     $slider_id = rand(100,10000);
     $category = get_the_category();
 	$catName = $category[0]->cat_name;
+	foreach( $category as $cat )
+	{
+		if( $cat->cat_name == "News" )
+		{
+			$catName = 'cat_news';
+		}
+	}
 ?>
 
 
 <?php do_action( 'et_page_heading' ); ?>
 
-<div class="container <?php if($catName=="News") echo 'cat_news';?>">
+<div class="container <?php echo $catName;?>">
 	<div class="page-content sidebar-position-<?php esc_attr_e( $l['sidebar'] ); ?>">
 		<div class="row">
 			
 			<div class="content <?php esc_attr_e( $l['content-class'] ); ?>">
 				<?php if(have_posts()): while(have_posts()) : the_post(); ?>
 					<?php 
-					if( $catName == "News"){
+					if( $catName == "cat_news"){
 					?>
 					<article <?php post_class('blog-post post-single'); ?> id="post-<?php the_ID(); ?>" >
 					
