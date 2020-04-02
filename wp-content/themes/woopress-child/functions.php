@@ -1,4 +1,9 @@
-<?php add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
+<?php 
+if ( ! session_id() ) {
+    session_start();
+}
+
+add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 function theme_enqueue_styles() {
     wp_enqueue_style( 'child-style', get_stylesheet_uri(), array( 'bootstrap', 'parent-style' ) );
 }
@@ -220,3 +225,115 @@ function woocommerce_disable_shop_page() {
     endif;
 }
 add_action( 'wp', 'woocommerce_disable_shop_page' );
+
+/* curbside functions */
+
+
+function wpcf7_do_something ($WPCF7_ContactForm) {
+  global $wpdb;
+
+    $submission = WPCF7_Submission::get_instance();
+
+  if ( $submission ) {
+    $posted_data = $submission->get_posted_data();
+    $uploaded_files = $submission->uploaded_files();
+  }
+
+  // curbside form
+  if( $WPCF7_ContactForm->id == 19729 ){
+    $wpcf7 = WPCF7_ContactForm::get_current();
+    $mail = $wpcf7->prop('mail');
+
+    // get incremental order ID
+	$querystr = "SELECT $wpdb->posts.* FROM $wpdb->posts WHERE $wpdb->posts.post_status = 'publish' AND $wpdb->posts.post_type = 'curbside_order' ORDER BY ID DESC LIMIT 1";
+	$pageposts = $wpdb->get_results($querystr);
+    if ($pageposts){
+    	$last_order = $pageposts[0];
+    	$order_contents = json_decode($last_order->post_content);
+
+    	$order_id = $order_contents->order_id + 1;
+    }
+    else
+    	$order_id = 1;
+
+   	$order_id = sprintf("%08d", ($order_contents->order_id + 1));
+
+    $posted_data['order_id'] = $order_id;
+
+    $mail['body'] = str_replace( '[current]', date('F d, Y H:i:s'), $mail['body'] );
+    $mail['body'] = str_replace( '[order_id]', $order_id, $mail['body'] );
+
+    $mail['subject'] = "New Order #".$order_id." submitted by Si Media";
+
+    // mail : to admin
+    // mail_2 : to customer
+    $mail_2 = $wpcf7->prop('mail_2');
+    $mail_2['body'] = str_replace( '[order_id]', $order_id, $mail_2['body'] );
+    $mail_2['subject'] = "Confirmation of Curbside order #".$order_id;
+
+    $newpostid = insertOrderInfos( $posted_data );
+
+    // set order ID to thank you page
+    $_SESSION['order_id'] = $order_id;
+
+    $wpcf7->set_properties(array("mail" => $mail, "mail_2" => $mail_2 ));
+  }
+
+  return $wpcf7;
+}
+add_action("wpcf7_before_send_mail", "wpcf7_do_something");
+
+// custom validation 
+add_filter( 'wpcf7_validate_text*', 'number_validation_filter', 20, 2 );
+function number_validation_filter( $result, $tag ) {
+  if ( 'your_cardnumber' == $tag->name ) {
+    $your_cardnumber = isset( $_POST['your_cardnumber'] ) ? trim( $_POST['your_cardnumber'] ) : '';
+  
+    if ( floor(log10($your_cardnumber)+1 ) < 9 ) {
+  		$result->invalidate( $tag, "Please input correct number.");
+    }
+    if ( strlen((string)$your_cardnumber) > 11 ) {
+  		$result->invalidate( $tag, "Please input correct number.");
+    }
+    if ( !is_numeric($your_cardnumber)) {
+  		$result->invalidate( $tag, "Please input correct number1.");
+    }
+  }
+  if ( 'your_phone' == $tag->name ) {
+  	$your_phone = isset( $_POST['your_phone'] ) ? trim( $_POST['your_phone'] ) : '';
+  	if ( floor(log10($your_cardnumber)+1 ) == 7 || !is_numeric($your_cardnumber) ) {
+  		$result->invalidate( $tag, "Please input correct number.");
+    }
+  }
+  
+  return $result;
+}
+
+
+add_filter( 'the_content', 'replace_thankyou_order' );
+function replace_thankyou_order( $content ) {
+	$order_id = isset( $_SESSION['order_id'] ) ? $_SESSION['order_id'] : 0;
+
+    if ( $order_id ) {
+        $content = str_replace( '00000000', $order_id, $content );
+        // $_SESSION['order_id'] = 0;
+    }
+
+    return $content;
+}
+
+add_action( 'wp_footer', 'mycustom_wp_footer' );
+
+function mycustom_wp_footer() {
+?>
+	<script>
+	document.addEventListener( 'wpcf7mailsent', function( event ) {
+	  if (event.detail.contactFormId == '19729' ) {
+	    window.location.href = '/thanks-curbside/'
+	  }
+	}, false );
+	</script>
+<?php
+}
+
+require_once __DIR__ . '/curbside.php';

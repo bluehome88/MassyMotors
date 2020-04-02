@@ -223,7 +223,7 @@
 }
 
 /* phartmacy page */
-.page.page-id-19623 .page-heading.bc-type-5{
+.page.page-id-16661 .page-heading.bc-type-5{
 	background-attachment: inherit !important;
 	background-position: center center;
 
@@ -234,17 +234,17 @@
     height: 0;
     padding-top: 9.64% !important;
 }
-.page.page-id-19623 .page-heading.bc-type-5 .container{
+.page.page-id-16661 .page-heading.bc-type-5 .container{
 	display: none;
 }
-.page.page-id-19623 .store_init h3, .page.page-id-19623 .store_init h4{
+.page.page-id-16661 .store_init h3, .page.page-id-16661 .store_init h4{
 	color: #1b4666 !important;
 }
 .page.page-id-16661 .store_init h3{
 	font-size: 30px !important;
 	text-transform: capitalize !important;
 }
-.page.page-id-19623 .store_init h4{
+.page.page-id-16661 .store_init h4{
 	font-size: 19.5px !important;
 	text-transform: inherit !important;
 }
@@ -341,7 +341,7 @@
 }
 .smart-overlay-content  .middle-middle h1, .smart-overlay-content .middle-middle h2{
 	text-transform: uppercase;
-	line-height: 30px;
+	line-height: 25px;
 	font-weight: bold;
 	font-family: "Arial Black";
 }
@@ -456,6 +456,24 @@
 .smart-overlay-close-icon{
 	display: none;
 }
+
+
+
+
+
+#menu-item-19711 > a {border-radius: 5px;
+    padding: 8px 15px;
+    background: #F58220;
+    color: #fff;
+    margin: 11px 0 0 8px;
+}
+
+
+
+
+
+
+
 /* ------------------ smart overlay end		----------------- */
 
 
@@ -495,7 +513,6 @@
 	}
 	.smart-overlay-content  .bottom  .half_container{
 		width:100% !important;
-		margin: 10px 5px !important;
 	}
 	.middle-middle h1{
 		line-height: 35px;
@@ -503,25 +520,18 @@
 	.vc_row.wpb_row{
 		margin-top:20px !important;
 	}
-	.vc_custom_15276087451561
+	.vc_custom_1527291573685
 	{
 		margin-top:70px !important;
 	}
 	.ms-slide .ms-layer{
 		top: 0 !important;
 	}
-	.top_texts{
-		padding: 40px 20px;
-		text-align: center;
-	}
-	.smart-overlay-content  .middle
-	{
-		padding: 25px 30px;
-	}
 }
 @media only screen and (max-width: 512px)
 {
 	div.ms-layer{
+		background: white;
 		margin-top: 5% !important;
 		width: calc(90% - 20px) !important;
 		background: rgba(255,255,255, 0.8);
@@ -536,13 +546,31 @@
 	.ms-skin-light-6 .ms-bullets.ms-dir-h{
 		left: inherit !important;
 	}
-	.top_texts{
-		padding: 40px 10px;
-		text-align: center;
-	}
-	.smart-overlay-content  .middle
-	{
-		padding: 25px 20px;
-	}
 } 
 
+/* Curbside Page Style */
+.wpcf7 label{
+	color: #00365f;
+	font-family: Helvetica;
+	line-height: 40px;
+	font-size: 18px;
+}
+.wpcf7 .row{
+	margin-top: 15px;
+	margin-bottom: 10px;
+}
+.wpcf7 input, .wpcf7 select, .wpcf7 textarea{
+	width: 100%;
+}
+.wpcf7 input[type="submit"]{
+	width: inherit;
+	background-color: #00365f;
+	line-height: 60px; 
+	padding: 0 25px;
+	font-size: 20px;
+	text-transform: inherit;
+	font-weight: bold;
+}
+.wpcf7 textarea{
+	border: 3px solid #dddddd;
+}
