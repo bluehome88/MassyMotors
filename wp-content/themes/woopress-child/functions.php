@@ -1,8 +1,9 @@
 <?php 
+
 if ( ! session_id() ) {
     session_start();
 }
-
+	
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 function theme_enqueue_styles() {
     wp_enqueue_style( 'child-style', get_stylesheet_uri(), array( 'bootstrap', 'parent-style' ) );
@@ -76,7 +77,7 @@ add_action('init', 'my_post_type_vacancy');
 
 /* Store Locator */
 function storelocator_func(){
-	query_posts('cat=30&posts_per_page=20&orderby=name&order=ASC');
+	query_posts('cat=30&posts_per_page=30&orderby=name&order=ASC');
 	$bad_char = array("'", " ", ".");
 	while (have_posts()) : the_post();
 		echo "<div style=\"padding-left:30px; display:none;\" class=\"stores\" id=\"" . str_replace($bad_char, "", urldecode(get_the_title())) . "\">";
@@ -91,7 +92,6 @@ echo '<script type="text/javascript">
 	//jQuery(".stores").hide();
 	jQuery("#select_store").on("change", function(){
 		$(".stores").hide();
-		//alert ($(this).val());
 		var store_id = $(this).val().replace("\'", "");
 		store_id = store_id.replace(" ", "");
 		store_id = store_id.replace(".", "");
@@ -226,9 +226,8 @@ function woocommerce_disable_shop_page() {
 }
 add_action( 'wp', 'woocommerce_disable_shop_page' );
 
+
 /* curbside functions */
-
-
 function wpcf7_do_something ($WPCF7_ContactForm) {
   global $wpdb;
 
@@ -240,7 +239,7 @@ function wpcf7_do_something ($WPCF7_ContactForm) {
   }
 
   // curbside form
-  if( $WPCF7_ContactForm->id == 19729 ){
+  if( $WPCF7_ContactForm->id == 20854 ){
     $wpcf7 = WPCF7_ContactForm::get_current();
     $mail = $wpcf7->prop('mail');
 
@@ -257,24 +256,23 @@ function wpcf7_do_something ($WPCF7_ContactForm) {
     	$order_id = 1;
 
    	$order_id = sprintf("%08d", ($order_contents->order_id + 1));
+    // set order ID to thank you page
+    $_SESSION['order_id'] = $order_id;
 
     $posted_data['order_id'] = $order_id;
 
     $mail['body'] = str_replace( '[current]', date('F d, Y H:i:s'), $mail['body'] );
     $mail['body'] = str_replace( '[order_id]', $order_id, $mail['body'] );
 
-    $mail['subject'] = "New Order #".$order_id." submitted by Si Media";
+    $mail['subject'] = "New Order #W".$order_id." submitted by Si Media";
 
     // mail : to admin
     // mail_2 : to customer
     $mail_2 = $wpcf7->prop('mail_2');
     $mail_2['body'] = str_replace( '[order_id]', $order_id, $mail_2['body'] );
-    $mail_2['subject'] = "Confirmation of Curbside order #".$order_id;
+    $mail_2['subject'] = "Confirmation of Curbside order #W".$order_id;
 
     $newpostid = insertOrderInfos( $posted_data );
-
-    // set order ID to thank you page
-    $_SESSION['order_id'] = $order_id;
 
     $wpcf7->set_properties(array("mail" => $mail, "mail_2" => $mail_2 ));
   }
@@ -290,22 +288,24 @@ function number_validation_filter( $result, $tag ) {
     $your_cardnumber = isset( $_POST['your_cardnumber'] ) ? trim( $_POST['your_cardnumber'] ) : '';
   
     if ( floor(log10($your_cardnumber)+1 ) < 9 ) {
-  		$result->invalidate( $tag, "Please input correct number.");
+  		$result->invalidate( $tag, "Loyalty card number must be 9 or 11 digits");
     }
     if ( strlen((string)$your_cardnumber) > 11 ) {
-  		$result->invalidate( $tag, "Please input correct number.");
+  		$result->invalidate( $tag, "Loyalty card number must be 9 or 11 digits");
     }
     if ( !is_numeric($your_cardnumber)) {
-  		$result->invalidate( $tag, "Please input correct number1.");
+  		$result->invalidate( $tag, "Loyalty card number must be 9 or 11 digits");
     }
   }
   if ( 'your_phone' == $tag->name ) {
+/*
   	$your_phone = isset( $_POST['your_phone'] ) ? trim( $_POST['your_phone'] ) : '';
-  	if ( floor(log10($your_cardnumber)+1 ) == 7 || !is_numeric($your_cardnumber) ) {
+  	if ( floor(log10($your_phone)+1 ) != 7 || !is_numeric($your_phone) ) {
   		$result->invalidate( $tag, "Please input correct number.");
     }
+*/
   }
-  
+
   return $result;
 }
 
@@ -328,7 +328,7 @@ function mycustom_wp_footer() {
 ?>
 	<script>
 	document.addEventListener( 'wpcf7mailsent', function( event ) {
-	  if (event.detail.contactFormId == '19729' ) {
+	  if (event.detail.contactFormId == '20854' ) {
 	    window.location.href = '/thanks-curbside/'
 	  }
 	}, false );

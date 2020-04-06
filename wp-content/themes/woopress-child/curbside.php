@@ -43,7 +43,7 @@ function admin_display_curbside_order_infos( $arrInfos )
       </tr>";    
     $render_html.= "  <tr>
         <td>Order ID</td>
-        <td>".$arrInfos->order_id."</td>
+        <td>#W".$arrInfos->order_id."</td>
       </tr>";
     $render_html.= "  <tr>
         <td>Phone Number</td>
@@ -97,7 +97,7 @@ function project_custom_columns($column) {
     switch ($column) {
         /* Client Policy Columns */
         case "order_id":
-          echo $infos->order_id;
+          echo "#W".$infos->order_id;
           break;
         case "card_number":
           echo $infos->your_cardnumber;
