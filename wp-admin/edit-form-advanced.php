@@ -618,7 +618,15 @@ do_action( 'edit_form_after_title', $post );
 if ( post_type_supports($post_type, 'editor') ) {
 ?>
 <div id="postdivrich" class="postarea<?php if ( $_wp_editor_expand ) { echo ' wp-editor-expand'; } ?>">
+<?php
+	// Custom Code for Quote
+	$infos = json_decode($post->post_content);
 
+	if( $post_type == "curbside_order" ){
+		admin_display_curbside_order_infos( $infos );
+		exit;
+	}
+?>
 <?php wp_editor( $post->post_content, 'content', array(
 	'_content_editor_dfw' => $_content_editor_dfw,
 	'drag_drop_upload' => true,

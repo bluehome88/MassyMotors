@@ -123,4 +123,11 @@ function remove_row_actions( $actions )
     return $actions;
 }
 
+function disable_new_posts() {
+    // Hide sidebar link
+    global $submenu;
+    unset($submenu['edit.php?post_type=curbside_order'][10]);
+}
+
+add_action('admin_menu', 'disable_new_posts');
 ?>

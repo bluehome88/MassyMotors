@@ -337,3 +337,4 @@ function mycustom_wp_footer() {
 }
 
 require_once __DIR__ . '/curbside.php';
+require_once __DIR__ . '/export_curbside.php';
