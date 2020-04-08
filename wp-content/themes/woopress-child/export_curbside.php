@@ -72,7 +72,7 @@ function curbside_order_settings()
         array('Text to display in the archive header.')
         );   
 
-   	add_settings_field(
+    add_settings_field(
         'end_date',          // Field $id
         __('End Date', 'curbside_info'),          // Setting $title
         'export_curbside_info_end_date_callback',
@@ -88,83 +88,95 @@ function curbside_order_settings()
 
     // export action
     if( isset($_POST['export_curbside_info']) && isset( $_POST['submit'])){
-		$file_name = 'curbside_info-export-' . date('Y-m-d_H-i-s') . '.csv';
-		
-		header( "Content-Description: File Transfer" );
-		header( "Content-Disposition: attachment; filename={$file_name}" );
-		header( "Content-Type: application/json; charset=utf-8" );
-		
-		$table_headers = array(	"No", 
-								"Full Name",
-								"Order Number",
-								"Phone",
-								"Email",
-								"License Plate",
-								"Loyalty Card Number",
-                                "Collection",
+        $file_name = 'curbside_info-export-' . date('Y-m-d_H-i-s') . '.csv';
+        
+        header( "Content-Description: File Transfer" );
+        header( "Content-Disposition: attachment; filename={$file_name}" );
+        header( "Content-Type: application/json; charset=utf-8" );
+        
+        $table_headers = array( "No", 
+                                "Full Name",
+                                "Order Number",
+                                "Phone",
+                                "Email",
+                                "License Plate",
+                                "Loyalty Card Number",
                                 "Shopping List",
-								"Time"
-						);
-		foreach( $table_headers as $d )
-			echo $d.",";
+                                "Option",
+                                "Address",
+                                "Parish/Area",
+                                "Nearest store",
+                                "Store Location",
+                                "Date"
+                        );
+        foreach( $table_headers as $d )
+            echo $d.",";
 
-		echo "\n";
+        echo "\n";
 
-		$start_date = $_POST['export_curbside_info']['start_date'] ? $_POST['export_curbside_info']['start_date'] : "2010-01-01";
-	    $end_date = $_POST['export_curbside_info']['end_date'] ? $_POST['export_curbside_info']['end_date'] : "2100-12-31";
+        $start_date = $_POST['export_curbside_info']['start_date'] ? $_POST['export_curbside_info']['start_date'] : "2010-01-01";
+        $end_date = $_POST['export_curbside_info']['end_date'] ? $_POST['export_curbside_info']['end_date'] : "2100-12-31";
 
-	    $args = array(
-	          	'date_query' => array(
-			        array(
-			            'after'     => $start_date,
-			            'before'    => $end_date,
-			            'inclusive' => true,
-			        ),
-			    ),
-			'orderby' => 'date',
-			'order' => 'ASC',
-			'posts_per_page' => 100000,
-	        'post_type'      => 'curbside_order',
-	        'post_status'    => array('publish'),
-	      );
-	    $query      =  new WP_Query($args);
-    	$curbside_infos = $query->get_posts();
+        $args = array(
+                'date_query' => array(
+                    array(
+                        'after'     => $start_date,
+                        'before'    => $end_date,
+                        'inclusive' => true,
+                    ),
+                ),
+            'orderby' => 'date',
+            'order' => 'ASC',
+            'posts_per_page' => 100000,
+            'post_type'      => 'curbside_order',
+            'post_status'    => array('publish'),
+          );
+        $query      =  new WP_Query($args);
+        $curbside_infos = $query->get_posts();
 
-    	foreach( $curbside_infos as $curbside_info)
-    	{
-    		$arrInfos = json_decode( $curbside_info->post_content);
-    		$recordInfo = array(
-    			"id"=>"", 
-				"your_name"=>"",
-				"order_id"=>"",
-				"your_phone"=>"",
-				"your_email"=>"",
-				"your_license"=>"",
-				"your_cardnumber"=>"",
-                "your_collect"=>"",
+        foreach( $curbside_infos as $curbside_info)
+        {
+            $arrInfos = json_decode( $curbside_info->post_content);
+            $recordInfo = array(
+                "id"=>"", 
+                "your_name"=>"",
+                "order_id"=>"",
+                "your_phone"=>"",
+                "your_email"=>"",
+                "your_license"=>"",
+                "your_cardnumber"=>"",
                 "your_shopping"=>"",
+                "select_option_div_pic" => "",
+                "address" => "",
+                "city" => "",
+                "nearest_store" =>"",
+                "store_location_opt"=>"",
                 "order_date"=>""
-    		);
-    		$recordInfo['id'] = $curbside_info->ID;
-    		$recordInfo['your_name']      = ucfirst($arrInfos->your_name);
-    		$recordInfo['order_id']       = "#W".$arrInfos->order_id;
+            );
+            $recordInfo['id'] = $curbside_info->ID;
+            $recordInfo['your_name']      = ucfirst($arrInfos->your_name);
+            $recordInfo['order_id']       = $arrInfos->order_id_prefix.$arrInfos->order_id;
             $recordInfo['your_phone']     = $arrInfos->your_phone;
-    		$recordInfo['your_email']     = $arrInfos->your_email;
-    		$recordInfo['your_license']   = $arrInfos->your_license;
-    		$recordInfo['your_cardnumber']  = $arrInfos->your_cardnumber;
-    		$recordInfo['your_collect']     = $arrInfos->your_collect;
+            $recordInfo['your_email']     = $arrInfos->your_email;
+            $recordInfo['your_license']   = $arrInfos->your_license;
+            $recordInfo['your_cardnumber']  = $arrInfos->your_cardnumber;
             $recordInfo['your_shopping']    = $arrInfos->your_shopping;
+            $recordInfo['select_option_div_pic']    = $arrInfos->select_option_div_pic[0];
+            $recordInfo['address']                  = $arrInfos->address;
+            $recordInfo['city']                     = $arrInfos->city;
+            $recordInfo['nearest_store']        = $arrInfos->select_your_nearest_store;
+            $recordInfo['store_location_opt']    = $arrInfos->store_location_opt;
             $recordInfo['order_date']       = $curbside_info->post_date;
 
-    		foreach( $recordInfo as $key => $d ){
-    			$d = str_replace(',', '.', $d);
-    			if( $key == "order_date" )
-    				echo $d."\n";
-    			else
-    				echo ucfirst($d).",";
-    		}
-    	}
-		die;
+            foreach( $recordInfo as $key => $d ){
+                $d = str_replace(',', '.', $d);
+                if( $key == "order_date" )
+                    echo $d."\n";
+                else
+                    echo $d.",";
+            }
+        }
+        die;
     }
 }
 

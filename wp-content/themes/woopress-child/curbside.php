@@ -10,9 +10,16 @@ function curbside_order() {
                 'singular_name' => __( 'Curbside Order' )
             ),
             'exclude_from_search'   => true,
-            'public' => true
+            'public' => true,
+            'supports' => array( 'title')                                                                                                                
         )
     );
+}
+
+
+add_action( 'add_meta_boxes', 'my_remove_publish_metabox' );
+function my_remove_publish_metabox() {
+    remove_meta_box( 'submitdiv', 'curbside_order', 'side' );
 }
 
 function insertOrderInfos($info) {
@@ -20,9 +27,8 @@ function insertOrderInfos($info) {
       return false;
     $info['your_shopping'] = str_replace("\r\n", "<br/>", $info['your_shopping']);
     $orderInfo = array(
-      'ID'            => $order_id,
       'post_title'    => ucfirst($info['your_name']),
-      'post_content'  => json_encode( $info ),
+      'post_content'  => json_encode($info, JSON_HEX_APOS), //json_encode( $info ),
       'post_type'     => 'curbside_order',
       'post_status'   => 'publish'
     );
@@ -32,18 +38,32 @@ function insertOrderInfos($info) {
     return $order_id;
 }
 
-function admin_display_curbside_order_infos( $arrInfos )
+
+
+
+
+
+
+
+add_action( 'edit_form_after_title', 'admin_display_curbside_order_infos' );
+
+function admin_display_curbside_order_infos( $post )
 {
+
+  if($post->post_type == "curbside_order"){
+
+    $arrInfos = json_decode($post->post_content) ;
+print_r( $arrInfos );
     $render_html = "<table border=1 cellspacing=0 cellpadding=10 style='min-width:50%'>
         <tr>
       <tr><td colspan=2 align='center'><b>Order Information</b></td></tr>";
     $render_html.= "  <tr>
         <td>Customer Name</td>
         <td>".$arrInfos->your_name."</td>
-      </tr>";    
+      </tr>";
     $render_html.= "  <tr>
         <td>Order ID</td>
-        <td>#W".$arrInfos->order_id."</td>
+        <td>" . $infos->order_id_prefix .$arrInfos->order_id."</td>
       </tr>";
     $render_html.= "  <tr>
         <td>Phone Number</td>
@@ -53,25 +73,61 @@ function admin_display_curbside_order_infos( $arrInfos )
         <td>Email</td>
         <td>".$arrInfos->your_email."</td>
       </tr>";
+    
+    if($arrInfos->select_option_div_pic[0] == "Pickup"){
     $render_html.= "  <tr>
         <td>License Plate</td>
         <td>".$arrInfos->your_license."</td>
       </tr>";
+  }
+
+
     $render_html.= "  <tr>
         <td>Loyalty Card Number</td>
         <td>".$arrInfos->your_cardnumber."</td>
       </tr>";
     $render_html.= "  <tr>
         <td>Preferred store to collect</td>
-        <td>".$arrInfos->your_collect."</td>
+        <td>".$arrInfos->store_location_opt."</td>
       </tr>";
     $render_html.= "  <tr>
         <td>Shopping List</td>
         <td>".$arrInfos->your_shopping."</td>
       </tr>";
 
+    $render_html.= "  <tr>
+          <td>Selected Option</td>
+          <td>".$arrInfos->select_option_div_pic[0]."</td>
+        </tr>";
+
+        if($arrInfos->select_option_div_pic[0] == "Delivery"){
+            $render_html.= "  <tr>
+                    <td>Address</td>
+                    <td>".$arrInfos->address."</td>
+                  </tr>";
+
+              $render_html.= "  <tr>
+                      <td>City</td>
+                      <td>".$arrInfos->city."</td>
+                    </tr>";
+        }
+
+   
+
     $render_html.= "</table>";
-    echo $render_html;
+    echo  $render_html;
+
+    echo '<style type="text/css">
+  span#footer-thankyou {
+      display: none;
+  }
+</style>';
+    // echo "<pre>";
+    // print_r($post);
+    // echo "</pre>";
+  }
+
+    
 }
 
 add_filter("manage_edit-curbside_order_columns", "curbside_order_edit_columns");
@@ -97,7 +153,7 @@ function project_custom_columns($column) {
     switch ($column) {
         /* Client Policy Columns */
         case "order_id":
-          echo "#W".$infos->order_id;
+          echo $infos->order_id_prefix . $infos->order_id;
           break;
         case "card_number":
           echo $infos->your_cardnumber;
