@@ -1,0 +1,90 @@
+<h1 style="color:#00365f; text-transform:inherit; margin-bottom: 25px;">Massy Curbside Order Form</h1>
+<div class="row">
+  <div class="col-md-4"><label>Full Name*:</label></div>
+  <div class="col-md-7">
+    [text* your_name]
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4"><label>Phone Number*:</label></div>
+  <div class="col-md-7">
+    [text* your_phone]
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4"><label>Email*:</label></div>
+  <div class="col-md-7">
+    [email* your_email]
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4"><label>License Plate*:</label></div>
+  <div class="col-md-7">
+    [text* your_license]
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4"><label>Loyalty Card Number*:</label></div>
+  <div class="col-md-7">
+    [text* your_cardnumber autocomplete:cc-csc]
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4"><label>Preferred store to collect*:</label></div>
+  <div class="col-md-7">
+    [select* your_collect first_as_label "Please select an option" "Alyce Glen" "Trincity" "Mandalay (Arima)" "St. Augustine" "Westmoorings" "St. Anns" "Chaguanas" "Marabella" "Westmoorings"]
+  </div>
+  <div class="disabled-message" style="display: none; clear: left; text-align: right; padding-right: 80px; color: #f27422;">This store is not taking more orders at this time, due to high demand, please return in the coming days.</div>
+</div>
+<div class="row">
+  <div class="col-md-12"><label>Shopping List - be sure to enter brand name, quantities and/or weight of items*</label></div>
+  </div>
+
+<div class="shopping_list_dynamic_fields">
+  <div class="row" id="shopping_list_dynamic_fields_heading">  
+    <div class="col-md-2 ">
+      <label>ITEM</label>
+    </div>
+    <div class="col-md-2 ">
+      <label>BRAND</label>
+    </div>
+    <div class="col-md-2 ">
+      <label>QUANTITY</label>
+    </div>
+    <div class="col-md-2 ">
+      <label>SIZE/VALUE</label>
+    </div>
+    <div class="col-md-2 ">
+      <label>DESCRIPTION</label>
+    </div>
+    <div class="col-md-2 ">
+      
+    </div>
+  </div>
+
+  <div class="row" id="shopping_list_dynamic_fields_data">  
+    <div>
+      <div class="col-md-2 ">
+       <input type="text" name="shopping_list_item_name[]" value="Bananas" placeholder="ITEM" autocomplete="cc-csc">
+      </div>
+      <div class="col-md-2 ">
+        <input type="text" name="shopping_list_brand_name[]" value="-" placeholder="BRAND">
+      </div>
+      <div class="col-md-2 ">
+        <input type="text" name="shopping_list_quantity[]" value="bunch" placeholder="QUANTITY">
+      </div>
+      <div class="col-md-2 ">
+        <input type="text" name="shopping_list_size_weight[]" value="2lbs" placeholder="SIZE/VALUE">
+      </div>
+      <div class="col-md-2 ">
+        <input type="text" name="shopping_list_description[]" value="Slightly green" placeholder="DESCRIPTION">
+      </div>
+      <div class="col-md-2 ">
+        <a href="javascript:void(0);" class="add_button" title="Add field"><img src="http://beta-massy.simplyintense.com/wp-content/themes/woopress-child/img/add-icon.png"/></a><br>
+        <!-- <a href="javascript:void(0);" class="remove_button"><img src="http://beta-massy.simplyintense.com/wp-content/themes/woopress-child/img/remove-icon.png"/></a> -->
+      </div>
+    </div>    
+  </div>
+</div>
+[recaptcha]
+[submit "Complete Order"]

@@ -122,6 +122,15 @@
 	text-align: left !important;
 }
 
+
+#menu-item-19745 > a {
+    border-radius: 5px;
+    padding: 8px 15px;
+    background: #F58220;
+    color: #fff;
+    margin: 11px 0 0 8px;
+}
+
 /*news page grid style*/
 .news_page_grid .vc_grid-item-zone-c-right .vc_gitem-animated-block{
 	width: 30% !important;
@@ -221,9 +230,8 @@
 .content-article p{
 	color: #6b6b6b;
 }
-
-/* phartmacy page */
-.page.page-id-16661 .page-heading.bc-type-5{
+/* gift cards page */
+.page.page-id-19849 .page-heading.bc-type-5{
 	background-attachment: inherit !important;
 	background-position: center center;
 
@@ -234,17 +242,151 @@
     height: 0;
     padding-top: 9.64% !important;
 }
-.page.page-id-16661 .page-heading.bc-type-5 .container{
+.page.page-id-19849 .page-heading.bc-type-5 .container{
 	display: none;
 }
-.page.page-id-16661 .store_init h3, .page.page-id-16661 .store_init h4{
+.page.page-id-19849 .store_init h3, .page.page-id-19623 .store_init h4{
 	color: #1b4666 !important;
 }
-.page.page-id-16661 .store_init h3{
+.page.page-id-19849 .store_init h3{
 	font-size: 30px !important;
 	text-transform: capitalize !important;
 }
-.page.page-id-16661 .store_init h4{
+.page.page-id-19849 .store_init h4{
+	font-size: 19.5px !important;
+	text-transform: inherit !important;
+}
+
+/* make it and win page */
+.page.page-id-20653 .page-heading.bc-type-5{
+	background-attachment: inherit !important;
+	background-position: center center;
+
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: top center;
+    
+    height: 0;
+    padding-top: 9.64% !important;
+}
+.page.page-id-20653 .page-heading.bc-type-5 .container{
+	display: none;
+}
+.page.page-id-20653 .store_init h3, .page.page-id-20653 .store_init h4{
+	color: #1b4666 !important;
+}
+.page.page-id-20653 .store_init h3{
+	font-size: 30px !important;
+	text-transform: capitalize !important;
+}
+.page.page-id-20653 .store_init h4{
+	font-size: 19.5px !important;
+	text-transform: inherit !important;
+}
+
+/* moving from house to house page */
+.page.page-id-20600 .page-heading.bc-type-5{
+	background-attachment: inherit !important;
+	background-position: center center;
+
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: top center;
+    
+    height: 0;
+    padding-top: 9.64% !important;
+}
+.page.page-id-20600 .page-heading.bc-type-5 .container{
+	display: none;
+}
+.page.page-id-20600 .store_init h3, .page.page-id-20600 .store_init h4{
+	color: #1b4666 !important;
+}
+.page.page-id-20600 .store_init h3{
+	font-size: 30px !important;
+	text-transform: capitalize !important;
+}
+.page.page-id-20600 .store_init h4{
+	font-size: 19.5px !important;
+	text-transform: inherit !important;
+}
+
+/* Massy Carnival page */
+.page.page-id-20105 .page-heading.bc-type-5{
+	background-attachment: inherit !important;
+	background-position: center center;
+
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: top center;
+    
+    height: 0;
+    padding-top: 9.64% !important;
+}
+.page.page-id-20105 .page-heading.bc-type-5 .container{
+	display: none;
+}
+.page.page-id-20105 .store_init h3, .page.page-id-20105 .store_init h4{
+	color: #1b4666 !important;
+}
+.page.page-id-20105 .store_init h3{
+	font-size: 30px !important;
+	text-transform: capitalize !important;
+}
+.page.page-id-20105 .store_init h4{
+	font-size: 19.5px !important;
+	text-transform: inherit !important;
+}
+
+/* win your wishlist page */
+.page.page-id-19988 .page-heading.bc-type-5{
+	background-attachment: inherit !important;
+	background-position: center center;
+
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: top center;
+    
+    height: 0;
+    padding-top: 9.64% !important;
+}
+.page.page-id-19988 .page-heading.bc-type-5 .container{
+	display: none;
+}
+.page.page-id-19988 .store_init h3, .page.page-id-19988 .store_init h4{
+	color: #1b4666 !important;
+}
+.page.page-id-19988 .store_init h3{
+	font-size: 30px !important;
+	text-transform: capitalize !important;
+}
+.page.page-id-19988 .store_init h4{
+	font-size: 19.5px !important;
+	text-transform: inherit !important;
+}
+/* phartmacy page */
+.page.page-id-19623 .page-heading.bc-type-5{
+	background-attachment: inherit !important;
+	background-position: center center;
+
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: top center;
+    
+    height: 0;
+    padding-top: 9.64% !important;
+}
+.page.page-id-19623 .page-heading.bc-type-5 .container{
+	display: none;
+}
+.page.page-id-19623 .store_init h3, .page.page-id-19623 .store_init h4{
+	color: #1b4666 !important;
+}
+.page.page-id-19623 .store_init h3{
+	font-size: 30px !important;
+	text-transform: capitalize !important;
+}
+.page.page-id-19623 .store_init h4{
 	font-size: 19.5px !important;
 	text-transform: inherit !important;
 }
@@ -461,7 +603,7 @@
 
 
 
-#menu-item-19711 > a {border-radius: 5px;
+#menu-item-20165 > a {border-radius: 5px;
     padding: 8px 15px;
     background: #F58220;
     color: #fff;
@@ -548,6 +690,7 @@
 	}
 } 
 
+
 /* Curbside Page Style */
 .wpcf7 label{
 	color: #00365f;
@@ -573,4 +716,26 @@
 }
 .wpcf7 textarea{
 	border: 3px solid #dddddd;
+}
+
+div#shopping_list_dynamic_fields_heading label {
+    font-size: 13px;
+    font-weight: 800;
+    color: black;
+    text-align: center !important;
+    margin: auto;
+    width: 100%;
+    max-width: 96px;
+}
+
+a.add_button img, a.remove_button img {
+    width: 24px;
+    height: 24px;
+    margin: 10px 0 0 0;
+}
+
+@media (max-width: 991px){
+	#shopping_list_dynamic_fields_heading{
+		display: none;
+	}
 }

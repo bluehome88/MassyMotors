@@ -20,7 +20,7 @@ while(have_posts()):the_post();
    if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
      ob_start();
 	the_post_thumbnail_url();
-	$img = 'http://massystorestt.com'.ob_get_contents();
+	$img = 'http://beta-massy.simplyintense.com'.ob_get_contents();
 	ob_end_clean();
    } else {
 	$img = '';

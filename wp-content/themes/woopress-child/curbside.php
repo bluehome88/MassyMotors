@@ -10,16 +10,9 @@ function curbside_order() {
                 'singular_name' => __( 'Curbside Order' )
             ),
             'exclude_from_search'   => true,
-            'public' => true,
-            'supports' => array( 'title')                                                                                                                
+            'public' => true
         )
     );
-}
-
-
-add_action( 'add_meta_boxes', 'my_remove_publish_metabox' );
-function my_remove_publish_metabox() {
-    remove_meta_box( 'submitdiv', 'curbside_order', 'side' );
 }
 
 function insertOrderInfos($info) {
@@ -38,22 +31,19 @@ function insertOrderInfos($info) {
     return $order_id;
 }
 
-
-
-
-
-
-
-
-add_action( 'edit_form_after_title', 'admin_display_curbside_order_infos' );
-
-function admin_display_curbside_order_infos( $post )
+function admin_display_curbside_order_infos( $arrInfos )
 {
 
-  if($post->post_type == "curbside_order"){
+  $shopping_list_item_name_col = $arrInfos->shopping_list_item_name;
 
-    $arrInfos = json_decode($post->post_content) ;
-print_r( $arrInfos );
+  $col_0 = array_column($shopping_list_item_name_col, 0);
+  $col_1 = array_column($shopping_list_item_name_col, 1);
+  $col_2 = array_column($shopping_list_item_name_col, 2);
+  $col_3 = array_column($shopping_list_item_name_col, 3);
+  $col_4 = array_column($shopping_list_item_name_col, 4);
+  $col_5 = array_column($shopping_list_item_name_col, 5);
+
+
     $render_html = "<table border=1 cellspacing=0 cellpadding=10 style='min-width:50%'>
         <tr>
       <tr><td colspan=2 align='center'><b>Order Information</b></td></tr>";
@@ -63,7 +53,7 @@ print_r( $arrInfos );
       </tr>";
     $render_html.= "  <tr>
         <td>Order ID</td>
-        <td>" . $infos->order_id_prefix .$arrInfos->order_id."</td>
+        <td>#W".$arrInfos->order_id."</td>
       </tr>";
     $render_html.= "  <tr>
         <td>Phone Number</td>
@@ -73,61 +63,36 @@ print_r( $arrInfos );
         <td>Email</td>
         <td>".$arrInfos->your_email."</td>
       </tr>";
-    
-    if($arrInfos->select_option_div_pic[0] == "Pickup"){
     $render_html.= "  <tr>
         <td>License Plate</td>
         <td>".$arrInfos->your_license."</td>
       </tr>";
-  }
-
-
     $render_html.= "  <tr>
         <td>Loyalty Card Number</td>
         <td>".$arrInfos->your_cardnumber."</td>
       </tr>";
     $render_html.= "  <tr>
         <td>Preferred store to collect</td>
-        <td>".$arrInfos->store_location_opt."</td>
-      </tr>";
-    $render_html.= "  <tr>
-        <td>Shopping List</td>
-        <td>".$arrInfos->your_shopping."</td>
+        <td>".$arrInfos->your_collect."</td>
       </tr>";
 
-    $render_html.= "  <tr>
-          <td>Selected Option</td>
-          <td>".$arrInfos->select_option_div_pic[0]."</td>
-        </tr>";
+      $render_html .= "<tr><td colspan='2'>Shopping List</td></tr>";
 
-        if($arrInfos->select_option_div_pic[0] == "Delivery"){
-            $render_html.= "  <tr>
-                    <td>Address</td>
-                    <td>".$arrInfos->address."</td>
-                  </tr>";
+      $s_no = 0;
+      
 
-              $render_html.= "  <tr>
-                      <td>City</td>
-                      <td>".$arrInfos->city."</td>
-                    </tr>";
-        }
-
-   
+      for ($i=0; $i <= count($arrInfos->shopping_list_item_name) - 1 ; $i++) { 
+        $s_no++;
+        $render_html.= "<tr><td colspan='2'>". "#$s_no " . $arrInfos->shopping_list_item_name[$i] . " " . $arrInfos->shopping_list_brand_name[$i] . " " . $arrInfos->shopping_list_quantity[$i] . " " . $arrInfos->shopping_list_size_weight[$i] . " " . $arrInfos->shopping_list_description[$i] ."</td></tr>";
+                 
+      }
 
     $render_html.= "</table>";
-    echo  $render_html;
+    echo $render_html;
 
-    echo '<style type="text/css">
-  span#footer-thankyou {
-      display: none;
-  }
-</style>';
     // echo "<pre>";
-    // print_r($post);
+    // print_r($arrInfos);
     // echo "</pre>";
-  }
-
-    
 }
 
 add_filter("manage_edit-curbside_order_columns", "curbside_order_edit_columns");
@@ -153,7 +118,7 @@ function project_custom_columns($column) {
     switch ($column) {
         /* Client Policy Columns */
         case "order_id":
-          echo $infos->order_id_prefix . $infos->order_id;
+          echo "#W".$infos->order_id;
           break;
         case "card_number":
           echo $infos->your_cardnumber;
@@ -179,11 +144,4 @@ function remove_row_actions( $actions )
     return $actions;
 }
 
-function disable_new_posts() {
-    // Hide sidebar link
-    global $submenu;
-    unset($submenu['edit.php?post_type=curbside_order'][10]);
-}
-
-add_action('admin_menu', 'disable_new_posts');
 ?>
