@@ -83,7 +83,7 @@ function admin_display_curbside_order_infos( $arrInfos )
 
       for ($i=0; $i <= count($arrInfos->shopping_list_item_name) - 1 ; $i++) { 
         $s_no++;
-        $render_html.= "<tr><td colspan='2'>". "#$s_no " . $arrInfos->shopping_list_item_name[$i] . " " . $arrInfos->shopping_list_brand_name[$i] . " " . $arrInfos->shopping_list_quantity[$i] . " " . $arrInfos->shopping_list_size_weight[$i] . " " . $arrInfos->shopping_list_description[$i] ."</td></tr>";
+        $render_html.= "<tr><td colspan='2'>". "#$s_no " . $arrInfos->shopping_list_item_name[$i] . " | " . $arrInfos->shopping_list_brand_name[$i] . " | " . $arrInfos->shopping_list_description[$i] . " | " . $arrInfos->shopping_list_size_weight[$i] . " | " . $arrInfos->shopping_list_quantity[$i] ."</td></tr>";
                  
       }
 
