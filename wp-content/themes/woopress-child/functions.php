@@ -14,31 +14,31 @@ function theme_enqueue_styles() {
 /* Team */
 
 function my_post_type_team() {
-  register_post_type( 'team',
+	register_post_type( 'team',
                 array(
-        'label' => __('Team'),
-        'singular_label' => __('Team Item', 'hilofoodstores'),
-        '_builtin' => false,
-        'public' => true,
-        'show_ui' => true,
-        'show_in_nav_menus' => true,
-        'hierarchical' => true,
-        'capability_type' => 'page',
-        'menu_icon' => 'dashicons-groups',
-        'rewrite' => array(
-          'slug' => 'team-view',
-          'with_front' => FALSE,
-        ),
-        'supports' => array(
-            'title',
-            'editor',
-            'thumbnail',
-            'excerpt',
-            'custom-fields',
-            'comments')
-          )
-        );
-  register_taxonomy('team_category', 'team', array('hierarchical' => true, 'label' => 'Team Categories', 'singular_name' => 'Category', "rewrite" => true, "query_var" => true));
+				'label' => __('Team'),
+				'singular_label' => __('Team Item', 'hilofoodstores'),
+				'_builtin' => false,
+				'public' => true,
+				'show_ui' => true,
+				'show_in_nav_menus' => true,
+				'hierarchical' => true,
+				'capability_type' => 'page',
+				'menu_icon' => 'dashicons-groups',
+				'rewrite' => array(
+					'slug' => 'team-view',
+					'with_front' => FALSE,
+				),
+				'supports' => array(
+						'title',
+						'editor',
+						'thumbnail',
+						'excerpt',
+						'custom-fields',
+						'comments')
+					)
+				);
+	register_taxonomy('team_category', 'team', array('hierarchical' => true, 'label' => 'Team Categories', 'singular_name' => 'Category', "rewrite" => true, "query_var" => true));
 }
 
 add_action('init', 'my_post_type_team');
@@ -46,31 +46,31 @@ add_action('init', 'my_post_type_team');
 
 /* Vacancies */
 function my_post_type_vacancy() {
-  register_post_type( 'vacancy',
+	register_post_type( 'vacancy',
                 array(
-        'label' => __('Vacancy'),
-        'singular_label' => __('Vacancy Item', 'hilofoodstores'),
-        '_builtin' => false,
-        'public' => true,
-        'show_ui' => true,
-        'show_in_nav_menus' => true,
-        'hierarchical' => true,
-        'capability_type' => 'page',
-        'menu_icon' => 'dashicons-businessman',
-        'rewrite' => array(
-          'slug' => 'vacancies',
-          'with_front' => FALSE,
-        ),
-        'supports' => array(
-            'title',
-            'editor',
-            'thumbnail',
-            'excerpt',
-            'custom-fields',
-            'comments')
-          )
-        );
-  register_taxonomy('vacancy_category', 'vacancy', array('hierarchical' => true, 'label' => 'Job Categories', 'singular_name' => 'Category', "rewrite" => true, "query_var" => true));
+				'label' => __('Vacancy'),
+				'singular_label' => __('Vacancy Item', 'hilofoodstores'),
+				'_builtin' => false,
+				'public' => true,
+				'show_ui' => true,
+				'show_in_nav_menus' => true,
+				'hierarchical' => true,
+				'capability_type' => 'page',
+				'menu_icon' => 'dashicons-businessman',
+				'rewrite' => array(
+					'slug' => 'vacancies',
+					'with_front' => FALSE,
+				),
+				'supports' => array(
+						'title',
+						'editor',
+						'thumbnail',
+						'excerpt',
+						'custom-fields',
+						'comments')
+					)
+				);
+	register_taxonomy('vacancy_category', 'vacancy', array('hierarchical' => true, 'label' => 'Job Categories', 'singular_name' => 'Category', "rewrite" => true, "query_var" => true));
 }
 
 add_action('init', 'my_post_type_vacancy');
@@ -79,26 +79,26 @@ add_action('init', 'my_post_type_vacancy');
 
 /* Store Locator */
 function storelocator_func(){
-  query_posts('cat=30&posts_per_page=30&orderby=name&order=ASC');
-  $bad_char = array("'", " ", ".");
-  while (have_posts()) : the_post();
-    echo "<div style=\"padding-left:30px; display:none;\" class=\"stores\" id=\"" . str_replace($bad_char, "", urldecode(get_the_title())) . "\">";
-      the_title('<h2><strong>', '</strong></h2>');
-      the_content();
-    echo "</div>";
-  endwhile;
+	query_posts('cat=30&posts_per_page=30&orderby=name&order=ASC');
+	$bad_char = array("'", " ", ".");
+	while (have_posts()) : the_post();
+		echo "<div style=\"padding-left:30px; display:none;\" class=\"stores\" id=\"" . str_replace($bad_char, "", urldecode(get_the_title())) . "\">";
+			the_title('<h2><strong>', '</strong></h2>');
+			the_content();
+		echo "</div>";
+	endwhile;
 wp_reset_query();
 
 echo '<script type="text/javascript">
  jQuery(document).ready(function($) {
-  //jQuery(".stores").hide();
-  jQuery("#select_store").on("change", function(){
-    $(".stores").hide();
-    var store_id = $(this).val().replace("\'", "");
-    store_id = store_id.replace(" ", "");
-    store_id = store_id.replace(".", "");
-    jQuery("#"+store_id).show();
-  });
+	//jQuery(".stores").hide();
+	jQuery("#select_store").on("change", function(){
+		$(".stores").hide();
+		var store_id = $(this).val().replace("\'", "");
+		store_id = store_id.replace(" ", "");
+		store_id = store_id.replace(".", "");
+		jQuery("#"+store_id).show();
+	});
 });
 
 </script>';
@@ -140,10 +140,10 @@ function massy_handling_fee() {
 
      if ( is_admin() && ! defined( 'DOING_AJAX' ) )
           return;
-      $percentage = 0.0198;
-    $fee = 6.00;
-    $surcharge = ($woocommerce->cart->cart_contents_total * $percentage)+$fee;
-      $woocommerce->cart->add_fee( 'Handling', $surcharge, true, 'standard' );
+     	$percentage = 0.0198;
+		$fee = 6.00;
+		$surcharge = ($woocommerce->cart->cart_contents_total * $percentage)+$fee;
+     	$woocommerce->cart->add_fee( 'Handling', $surcharge, true, 'standard' );
 }
 
 
@@ -163,8 +163,8 @@ function massy_custom_checkout_field_display_admin_order_meta($order){
 add_filter('woocommerce_email_order_meta_keys', 'massy_woocommerce_email_order_meta_keys');
 
 function massy_woocommerce_email_order_meta_keys( $keys ) {
-  $keys['Massy Card'] = '_billing_massycard';
-  return $keys;
+	$keys['Massy Card'] = '_billing_massycard';
+	return $keys;
 }
 
 
@@ -174,9 +174,9 @@ function massy_woocommerce_email_order_meta_keys( $keys ) {
 add_filter('woocommerce_email_subject_new_order', 'change_admin_email_subject', 1, 2);
 
 function change_admin_email_subject( $subject, $order ) {
-  global $woocommerce;
-  $subject = sprintf( 'Order (#%s) - %s %s', $order->id, $order->billing_first_name, $order->billing_last_name);
-  return $subject;
+	global $woocommerce;
+	$subject = sprintf( 'Order (#%s) - %s %s', $order->id, $order->billing_first_name, $order->billing_last_name);
+	return $subject;
 }
 
 
@@ -197,9 +197,9 @@ function my_login_logo() { ?>
         .login h1 a {
             background-image: url(http://beta-massy.simplyintense.com.php53-1.ord1-1.websitetestlink.com/wp-content/uploads/2015/11/massy-stores-logo-2.png);
             padding-bottom: 0px;
-          height: 70px;
-        width: 260px;
-    background-size: 254px;
+	        height: 70px;
+    		width: 260px;
+		background-size: 254px;
         }
     </style>
 <?php }
@@ -209,10 +209,10 @@ add_action( 'login_enqueue_scripts', 'my_login_logo' );
  *  Login using email
  **/
 function login_with_email_address($username) {
-  $user = get_user_by_email($username);
-  if(!empty($user->user_login))
-    $username = $user->user_login;
-  return $username;
+	$user = get_user_by_email($username);
+	if(!empty($user->user_login))
+		$username = $user->user_login;
+	return $username;
 }
 add_action('wp_authenticate','login_with_email_address');
 
@@ -249,23 +249,32 @@ function wpcf7_do_something ($WPCF7_ContactForm) {
     $mail = $wpcf7->prop('mail');
 
     // get incremental order ID
+	
   $querystr = "SELECT $wpdb->posts.* FROM $wpdb->posts WHERE $wpdb->posts.post_status = 'publish' AND $wpdb->posts.post_type = 'curbside_order' ORDER BY ID DESC LIMIT 1";
-  $pageposts = $wpdb->get_results($querystr);
-    if ($pageposts){
-      $last_order = $pageposts[0];
-      $order_contents = json_decode($last_order->post_content);
 
-      $order_id = $order_contents->order_id + 1;
+	
+  $pageposts = $wpdb->get_results($querystr);
+  // print_r($pageposts);
+
+    if ($pageposts){
+    	$last_order = $pageposts[0];
+      $last_order_id = get_post_meta( $last_order->ID , 'curbside_order_id' , true  );
+      $order_contents = $last_order_id;
+
     }
     else
     { 
-      $order_id = 1;
+   	  $order_id = 1;
     }
 
-    $numeric_order_id = (int) $order_contents->order_id; 
+    //$numeric_order_id = (int) $order_contents->order_id; 
+    $numeric_order_id = $order_contents; 
     $numeric_order_id = $numeric_order_id + 1;
  
-    $order_id = sprintf("%08d", ($numeric_order_id));
+   	$order_id = sprintf("%08d", ($numeric_order_id));
+
+    // Start the session
+    session_start();
     // set order ID to thank you page
     $_SESSION['order_id'] = $order_id;
 
@@ -283,10 +292,9 @@ function wpcf7_do_something ($WPCF7_ContactForm) {
 
     for ($i=0; $i <= count($shoping_arrInfos) - 1 ; $i++) { 
       $s_no++;
-      $shoping_list[$i]= $_POST['shopping_list_item_name'][$i] . " " .  $_POST['shopping_list_brand_name'][$i] . " " . $_POST['shopping_list_description'][$i] . " " . $_POST['shopping_list_size_weight'][$i] . " " . $_POST['shopping_list_quantity'][$i] . "<br>" ;
+      $shoping_list[$i]= $_POST['shopping_list_item_name'][$i] . " " . $_POST['shopping_list_quantity'][$i] . "<br>" ;
                
     }
-
 
     $mail['body'] = str_replace( '[your_shopping]', implode(" ", $shoping_list) , $mail['body'] );
 
@@ -317,20 +325,20 @@ function number_validation_filter( $result, $tag ) {
     $your_cardnumber = isset( $_POST['your_cardnumber'] ) ? trim( $_POST['your_cardnumber'] ) : '';
 
     if ( floor(log10($your_cardnumber)+1 ) < 9 ) {
-      $result->invalidate( $tag, "Loyalty card number must be 9 or 11 digits");
+  		$result->invalidate( $tag, "Loyalty card number must be 9 or 11 digits");
     }
     if ( strlen((string)$your_cardnumber) > 11 ) {
-      $result->invalidate( $tag, "Loyalty card number must be 9 or 11 digits");
+  		$result->invalidate( $tag, "Loyalty card number must be 9 or 11 digits");
     }
     if ( !is_numeric($your_cardnumber)) {
-      $result->invalidate( $tag, "Loyalty card number must be 9 or 11 digits");
+  		$result->invalidate( $tag, "Loyalty card number must be 9 or 11 digits");
     }
   }
   if ( 'your_phone' == $tag->name ) {
 /*
-    $your_phone = isset( $_POST['your_phone'] ) ? trim( $_POST['your_phone'] ) : '';
-    if ( floor(log10($your_phone)+1 ) != 7 || !is_numeric($your_phone) ) {
-      $result->invalidate( $tag, "Please input correct number.");
+  	$your_phone = isset( $_POST['your_phone'] ) ? trim( $_POST['your_phone'] ) : '';
+  	if ( floor(log10($your_phone)+1 ) != 7 || !is_numeric($your_phone) ) {
+  		$result->invalidate( $tag, "Please input correct number.");
     }
 */
   }
@@ -341,7 +349,8 @@ function number_validation_filter( $result, $tag ) {
 
 add_filter( 'the_content', 'replace_thankyou_order' );
 function replace_thankyou_order( $content ) {
-  $order_id = isset( $_SESSION['order_id'] ) ? $_SESSION['order_id'] : 0;
+  session_start();
+	$order_id = isset( $_SESSION['order_id'] ) ? $_SESSION['order_id'] : 0;
 
 
     if ( $order_id ) {
@@ -356,20 +365,111 @@ add_action( 'wp_footer', 'mycustom_wp_footer' );
 
 function mycustom_wp_footer() {
 ?>
-  <script>
-  document.addEventListener( 'wpcf7mailsent', function( event ) {
-    if (event.detail.contactFormId == '20854' ) {
-      window.location.href = '/thanks-curbside/'
+	<script>
+    jQuery(document).ready(function(){
+   /* jQuery("#shopping_list_dynamic_fields_data").each(function(){
+      jQuery(this).find('.required').blur(function(){
+        var fval = jQuery(this).val();
+        fval = fval.trim();
+        if(fval == '') { jQuery(this).addClass('invalid'); }
+        else { jQuery(this).removeClass('invalid'); }
+      });
+    });
+    */
+    function required_shopping_fileds(){
+      jQuery("#shopping_list_dynamic_fields_data").find('.required').blur(function(){
+         var fval = jQuery(this).val();
+         fval = fval.trim();
+         if(fval == '') { jQuery(this).addClass('invalid'); }
+         else { jQuery(this).removeClass('invalid'); }
+      }); 
     }
-  }, false );
-  </script>
 
+    //required_shopping_fileds();
+
+    jQuery('#wpcf7-f20854-p20855-o1 .wpcf7-submit').click(function(e){ 
+
+      jQuery('#wpcf7-f20854-p20855-o1').find('.contact-error').remove();
+
+      jQuery(this).parents().find('.required').each(function(){
+      var fval = jQuery(this).val();
+             fval = fval.trim();
+             if(fval == '') {
+              jQuery(this).addClass('invalid'); 
+            }
+             else {
+              jQuery(this).removeClass('invalid');
+
+             }
+
+      });
+
+      if(jQuery('#shopping_list_dynamic_fields_data .required').hasClass('invalid')) {  
+          jQuery('#shopping_list_dynamic_fields_data').parent().append('<div class="contact-error">Please fix the error on the fields marked red/highlighted.');
+          
+           e.preventDefault(); 
+           
+      }
+      else{
+        modal.style.display = "block";
+        e.preventDefault(); 
+        
+        jQuery("#confirm_yes").click(function(){
+          if( jQuery("#confirm_yes").val() == "Yes! I am done"){       
+                  console.log("Yes! I am done");   
+                  modal.style.display = "none"; 
+                  jQuery('#wpcf7-f20854-p20855-o1 .wpcf7-submit').submit();
+
+                  document.addEventListener( 'wpcf7mailsent', function( event ) {
+                      if (event.detail.contactFormId == '20854' ) {
+                         window.location.href = '/thanks-curbside/';
+                      }
+                  }, false );
+                                          
+            }
+        });
+
+        jQuery("#confirm_no").click(function(){
+          if( jQuery("#confirm_no").val() == "No, I am not"){       
+                  console.log("No, I am not");   
+                  modal.style.display = "none";  
+
+            }
+        }); 
+      }  
+           
+    });
+
+
+    });
+	</script>
+  <script>
+  // Get the modal
+  var modal = document.getElementById("curbside_order_confirmation_modal");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+  </script>
   <script type="text/javascript">
       jQuery(document).ready(function(){
           var maxField = 50; //Input fields increment limitation
           var addButton = jQuery('.add_button'); //Add button selector
           var wrapper = jQuery('#shopping_list_dynamic_fields_data'); //Input field wrapper
-          var fieldHTML = '<div><div class="col-md-2"> <input type="text" name="shopping_list_item_name[]" value="" placeholder="Bananas"> </div><div class="col-md-2"> <input type="text" name="shopping_list_brand_name[]" value="" placeholder="BRAND"> </div><div class="col-md-2"> <input type="text" name="shopping_list_description[]" value="" placeholder="Slightly green"> </div><div class="col-md-2"> <input type="text" name="shopping_list_size_weight[]" value="" placeholder="2lbs"> </div><div class="col-md-2"> <input type="text" name="shopping_list_quantity[]" value="" placeholder="bunch"> </div><div class="col-md-2"> <a href="javascript:void(0);" class="add_button" title="Add field"><img src="http://beta-massy.simplyintense.com/wp-content/themes/woopress-child/img/add-icon.png"> &nbsp; </a><a href="javascript:void(0);" class="remove_button"><img src="http://beta-massy.simplyintense.com/wp-content/themes/woopress-child/img/remove-icon.png"></a><br><br></div></div>'; //New input field html 
+          var fieldHTML = '<div> <div class="col-md-6"> <input type="text" name="shopping_list_item_name[]" maxlength="200" class="required invalid" value="" placeholder=""> </div><div class="col-md-2"> <input type="text" name="shopping_list_quantity[]" maxlength="100" class="required invalid" value="" placeholder=""> </div><div class="col-md-4 btn-wrap"> <a href="javascript:void(0);" class="add_button" title="Add Next Item">Add Item </a><a href="javascript:void(0);" class="remove_button" title="Remove Item">Remove</a><br><br></div></div>'; //New input field html 
+          
+
           var x = 1; //Initial field counter is 1
           
           //Once add button is clicked
@@ -379,7 +479,26 @@ function mycustom_wp_footer() {
               if(x = 1){ 
                   x++; //Increment field counter
                   jQuery("#wpcf7-f20854-p20855-o1").find("#shopping_list_dynamic_fields_data").append(fieldHTML); //Add field html
-                  removePlaceholder();
+                  // removePlaceholder();
+
+                 var required_shopping_fileds = "";  
+                 required_shopping_fileds = jQuery("#shopping_list_dynamic_fields_data .required");
+
+                  for(var i = 0; i< required_shopping_fileds.length; i++){                   
+                   console.log(required_shopping_fileds[i].value);
+                    if(required_shopping_fileds[i].value == '' ){             
+                        
+                        required_shopping_fileds[i].classList.add("invalid");
+                   }
+                   else {
+                    required_shopping_fileds[i].classList.remove("invalid");
+
+                   }
+                   
+
+                  
+                  }
+                 
               }
           });
           
@@ -399,11 +518,25 @@ function mycustom_wp_footer() {
             }
           }
 
-          removePlaceholder();
+          // removePlaceholder();
+
+          jQuery(document).on('keypress',function(e) {
+            var x = 1;
+            var keyCode = e.keyCode || e.which;
+              if(keyCode === 13) {
+                e.preventDefault();
+                    //return false;
+                   if(x = 1){ 
+                  x++; //Increment field counter
+                  jQuery("#wpcf7-f20854-p20855-o1").find("#shopping_list_dynamic_fields_data").append(fieldHTML);
+                }
+              }
+          });
 
           
       });
   </script>
+ 
 <?php
 }
 

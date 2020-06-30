@@ -2,6 +2,7 @@
 
 // register custom post
 add_action( 'init', 'curbside_order' );
+
 function curbside_order() {
     register_post_type( 'curbside_order',
         array(
@@ -13,7 +14,38 @@ function curbside_order() {
             'public' => true
         )
     );
+
+
+    if(isset($_GET['adminorderreset']) &&  $_GET['adminorderreset'] > 0) {
+
+        global $wpdb;
+
+		    $querystr = "SELECT $wpdb->posts.* FROM $wpdb->posts WHERE $wpdb->posts.post_status = 'publish' AND $wpdb->posts.post_type = 'curbside_order' ORDER BY ID DESC LIMIT 1";
+
+				$pageposts = $wpdb->get_results($querystr);
+				// print_r($pageposts);
+
+				if ($pageposts){
+					$last_order = $pageposts[0];
+				  $last_post_id = $last_order->ID;
+				}
+
+
+				//$post_id = $_GET['postid']; 
+				$reset_order_id = $_GET['adminorderreset']; 
+
+        $reset_order_id = sprintf("%08d", ($reset_order_id)); 
+
+				 
+				update_post_meta( $last_post_id , 'curbside_order_id' , $reset_order_id);  
+
+        die('order ID updated for post id '.$last_post_id.' to '.$reset_order_id); 
+
+		}
+
+
 }
+
 
 function insertOrderInfos($info) {
     if ( ! $info)
@@ -21,12 +53,18 @@ function insertOrderInfos($info) {
     $info['your_shopping'] = str_replace("\r\n", "<br/>", $info['your_shopping']);
     $orderInfo = array(
       'post_title'    => ucfirst($info['your_name']),
-      'post_content'  => json_encode($info, JSON_HEX_APOS), //json_encode( $info ),
+      'post_content'  => json_encode($info, JSON_HEX_TAG | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE | JSON_HEX_APOS), //json_encode( $info ),
       'post_type'     => 'curbside_order',
       'post_status'   => 'publish'
     );
 
     $order_id = wp_insert_post( $orderInfo );
+
+    if ($order_id) {
+      add_post_meta($order_id , "curbside_order_id", $info['order_id'],  false );
+      add_post_meta($order_id , "curbside_shopping_list_items", $info['shopping_list_item_name'],  false );
+      
+    }
 
     return $order_id;
 }
@@ -34,7 +72,10 @@ function insertOrderInfos($info) {
 function admin_display_curbside_order_infos( $arrInfos )
 {
 
+
   $shopping_list_item_name_col = $arrInfos->shopping_list_item_name;
+
+  //$shopping_list_item_name_col = get_post_meta( get_the_ID() , 'shopping_list_items', true);
 
   $col_0 = array_column($shopping_list_item_name_col, 0);
   $col_1 = array_column($shopping_list_item_name_col, 1);
@@ -44,6 +85,18 @@ function admin_display_curbside_order_infos( $arrInfos )
   $col_5 = array_column($shopping_list_item_name_col, 5);
 
 
+    
+
+   if(empty( (get_post_meta(get_the_ID() , 'curbside_order_id', true)) ) )
+   {
+        $last_order_id = $arrInfos->order_id;  
+   }
+   else 
+   {
+          $last_order_id = (get_post_meta(get_the_ID() , 'curbside_order_id', true));  
+   }
+
+ 
     $render_html = "<table border=1 cellspacing=0 cellpadding=10 style='min-width:50%'>
         <tr>
       <tr><td colspan=2 align='center'><b>Order Information</b></td></tr>";
@@ -53,7 +106,7 @@ function admin_display_curbside_order_infos( $arrInfos )
       </tr>";
     $render_html.= "  <tr>
         <td>Order ID</td>
-        <td>#W".$arrInfos->order_id."</td>
+        <td>#W".$last_order_id."</td>
       </tr>";
     $render_html.= "  <tr>
         <td>Phone Number</td>
@@ -83,17 +136,21 @@ function admin_display_curbside_order_infos( $arrInfos )
 
       for ($i=0; $i <= count($arrInfos->shopping_list_item_name) - 1 ; $i++) { 
         $s_no++;
-        $render_html.= "<tr><td colspan='2'>". "#$s_no " . $arrInfos->shopping_list_item_name[$i] . " | " . $arrInfos->shopping_list_brand_name[$i] . " | " . $arrInfos->shopping_list_description[$i] . " | " . $arrInfos->shopping_list_size_weight[$i] . " | " . $arrInfos->shopping_list_quantity[$i] ."</td></tr>";
+        $render_html.= "<tr><td colspan='2'>". "#$s_no " . $arrInfos->shopping_list_item_name[$i] . " | " . $arrInfos->shopping_list_quantity[$i] ."</td></tr>";
                  
       }
 
     $render_html.= "</table>";
     echo $render_html;
 
-    // echo "<pre>";
-    // print_r($arrInfos);
-    // echo "</pre>";
+   // echo "<pre>";
+   // print_r($arrInfos);
+   // print_r($shopping_list_item_name_col);
+   // echo "</pre>";
+
+
 }
+
 
 add_filter("manage_edit-curbside_order_columns", "curbside_order_edit_columns");
 function curbside_order_edit_columns($columns) {
@@ -111,14 +168,26 @@ function curbside_order_edit_columns($columns) {
 }
 
 add_action("manage_posts_custom_column",  "project_custom_columns");
+
 function project_custom_columns($column) {
     global $post;
     $infos = json_decode($post->post_content);
 
+  
+    if(empty( (get_post_meta(get_the_ID() , 'curbside_order_id', true)) ) )
+   {
+        $last_order_id = $infos->order_id;  
+   }
+   else 
+   {
+          $last_order_id = (get_post_meta(get_the_ID() , 'curbside_order_id', true));  
+   }
+
+
     switch ($column) {
         /* Client Policy Columns */
         case "order_id":
-          echo "#W".$infos->order_id;
+          echo "#W". $last_order_id;//$infos->order_id;
           break;
         case "card_number":
           echo $infos->your_cardnumber;
